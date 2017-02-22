@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Device</title>
+</head>
+<body>
+    <input type="text" id="location" />
+    <input type="button" value="send" id="send" />
+    <div id='messages'></div>
+
+    <script type="text/javascript">
+        var socket,
+            $location = document.getElementById('location'),
+			$messages = document.getElementById('messages');
+
+        if (typeof (WebSocket) !== 'undefined') {
+            socket = new WebSocket("ws://momiswatching.azurewebsites.net/Subscriptions/DeviceSubscriptionHandler.ashx?device_id=fsdfs323fsdfs3sd");
+        } else {
+            socket = new MozWebSocket("ws://momiswatching.azurewebsites.net/Subscriptions/DeviceSubscriptionHandler.ashx");
+        }
+
+		//socket.onopen = function() {
+		//	alert("Соединение установлено.");
+		//};
+
+		//socket.onerror = function(error) {
+		//  alert("Ошибка " + error.message);
+		//};
+
+        socket.onmessage = function (msg) {
+			//alert("Получены данные " + event.data);
+            var $el = document.createElement('p');
+            $el.innerHTML = msg.data;
+            $messages.appendChild($el);
+        };
+
+        socket.onclose = function (event) {
+			if (event.wasClean) {
+				//alert('Соединение закрыто чисто');
+			  } else {
+				alert('[Error] Код: ' + event.code + ' причина: ' + event.reason);
+			  }
+		};
+
+        document.getElementById('send').onclick = function () {
+			socket.send($location.value);
+        };
+    </script>
+</body>
+</html>
