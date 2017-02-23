@@ -1,0 +1,40 @@
+﻿
+@model MomIsWatching.Models.DeviceContext
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "MapPage";
+}
+<div>
+    <h3>Список устройств</h3>
+    <table>
+        @foreach (MomIsWatching.Models.Device device in Model.Devices)
+        {
+            <tr>
+                <td><p>@device.Id</p></td>
+                <td><p>@device.DeviceId</p></td>
+                <td><p>@device.Name</p></td>
+                <td><p>@device.Interval</p></td>
+                <td><p>@device.Zones</p></td>
+            </tr>
+        }
+    </table>
+    
+    <h3>Логи</h3>
+    <table>
+        @foreach (MomIsWatching.Models.DeviceLog device in Model.DeviceLogs)
+        {
+            <tr>
+                <td><p>@device.DeviceId</p></td>
+                <td><p>@device.Time</p></td>
+                <td><p>@device.Location</p></td>
+                <td><p>@device.Charge</p></td>
+                <td><p>@device.IsSos</p></td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+
+

@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.WebSockets;
+using MomIsWatching.Models;
 
 namespace MomIsWatching.Subscriptions
 {
@@ -45,7 +46,7 @@ namespace MomIsWatching.Subscriptions
             Locker.EnterWriteLock();
             try
             {
-                Clients.Maps.Add(socket);
+                Clients.Maps.Add(new OnlineMap() { Websocket = socket });
             }
             finally
             {

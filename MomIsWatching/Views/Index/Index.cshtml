@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@model MomIsWatching.Models.DeviceContext
+
+@{
+    Layout = null;
+    ViewBag.Title = "MapPage";
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Mom is watching!</title>
@@ -18,6 +25,21 @@
 
 </head>
 <body>
+    
+    <div style="position: absolute;background: white;z-index: 999;padding: 20px;border-radius: 5px;margin: 100px 10px 10px 10px;">
+        <table>
+            @foreach (MomIsWatching.Models.Device device in Model.Devices)
+            {
+                <tr>
+                    <td><p>@device.Id</p></td>
+                    <td><p>@device.DeviceId</p></td>
+                    <td><p>@device.Name</p></td>
+                    <td><p>@device.Interval</p></td>
+                    <td><p>@device.Zones</p></td>
+                </tr>
+            }
+        </table>
+    </div>
 
     <!-- MAP CANVAS -->
     <div id="map"></div>
@@ -56,8 +78,9 @@
 		//};
 
 		socket.onmessage = function (msg) {
+			var packet = JSON.parse(msg.data);
 
-			var myLatLng = { lat: parseFloat(msg.data.split(';')[0]), lng: parseFloat(msg.data.split(';')[1]) };
+			var myLatLng = { lat: parseFloat(packet.location.split(';')[0]), lng: parseFloat(packet.location.split(';')[1]) };
 
 			var marker = new google.maps.Marker({
 				position: myLatLng,

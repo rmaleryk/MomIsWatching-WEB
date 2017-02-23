@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Net.WebSockets;
@@ -8,6 +10,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.WebSockets;
+using MomIsWatching.Models;
+using Newtonsoft.Json.Linq;
 
 namespace MomIsWatching.Subscriptions
 {
@@ -39,13 +43,42 @@ namespace MomIsWatching.Subscriptions
         private async Task WebSocketRequest(AspNetWebSocketContext context)
         {
             // Получаем сокет клиента-девайса из контекста запроса
-            var socket = context.WebSocket;
+            var deviceSocket = context.WebSocket;
+
+            // Получаем айди девайса из запроса
+            string rDeviceId = context.QueryString["deviceId"];
+
+            // Если устройство не дает айди - выходим
+            if (string.IsNullOrEmpty(rDeviceId)) return;
+
+            var db = new DeviceContext();
+            var onlineDevice = new OnlineDevice();
             
             // Добавляем его в список клиентов-девайсов
             Locker.EnterWriteLock();
             try
             {
-                Clients.Devices.Add(socket);
+                // Смотрим, есть ли в базе такой девайс, если нет - добавляем в Devices
+                var devices = db.Devices.ToList<Device>().Where<Device>(x => x.DeviceId == rDeviceId).ToList();
+
+                if (devices.Count == 0)
+                {
+                    int index = 0;
+                    if (db.Devices.ToList().Count > 0)
+                        index = db.Devices.ToList().Last().Id + 1;
+                    
+                    devices.Add(new Device() { Id = index, DeviceId = rDeviceId, Interval = 5000, Name = "NoName", Zones = ""} );
+
+                    db.Devices.AddOrUpdate(devices[0]);
+                    // Коммитим изменения в БД
+                    db.SaveChanges();
+                }
+
+                onlineDevice.Instance = devices[0];
+                onlineDevice.Websocket = deviceSocket;
+
+                Clients.Devices.Add(onlineDevice);
+
             }
             finally
             {
@@ -56,22 +89,61 @@ namespace MomIsWatching.Subscriptions
             while (true)
             {
                 var buffer = new ArraySegment<byte>(new byte[1024]);
-
+                
                 // Ожидаем данные
-                var result = await socket.ReceiveAsync(buffer, CancellationToken.None);
+                var result = await deviceSocket.ReceiveAsync(buffer, CancellationToken.None);
 
+                // TODO: нужно подумать, как красиво убрать хвост от массива из 1024 элементов
+                // Убираем пустые элементы массива (небольшой костыль)
+                buffer = new ArraySegment<byte>(buffer.Where(x => x != 0).ToArray());
+
+                var str = Encoding.Default.GetString(buffer.Array);
+                
+                try
+                {
+                    // Парсим Json
+                    dynamic deviceLog = JObject.Parse(str);
+
+                    int index = 0;
+                    if (db.DeviceLogs.ToList().Count > 0)
+                        index = db.DeviceLogs.ToList().Last().Id + 1;
+
+                    var log = new DeviceLog()
+                    {
+                        Id = index,
+                        DeviceId = onlineDevice.Instance.Id,
+                        Charge = deviceLog.charge,
+                        Location = deviceLog.location,
+                        IsSos = deviceLog.isSos,
+                        Time = DateTime.Now
+                    };
+
+                    // Ищем среди онлайн устройств наше, чтобы заменить у него текущий лог
+                    // ох, уже эти предикаты... сэкономили 10 строчек кода
+                    Clients.Devices.FindAll(x => x == onlineDevice).ForEach(x => x.Log = log);
+
+                    // Добавляем лог в БД
+                    db.DeviceLogs.AddOrUpdate(log);
+                    // Коммитим изменения в БД
+                    db.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
 
                 //Передаём сообщение всем клиентам-картам
                 for (int i = 0; i < Clients.Maps.Count; i++)
                 {
 
-                    WebSocket client = Clients.Maps[i];
+                    var client = Clients.Maps[i];
 
                     try
                     {
-                        if (client.State == WebSocketState.Open)
+                        if (client.Websocket.State == WebSocketState.Open)
                         {
-                            await client.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
+                            await client.Websocket.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
                         }
                     }
                     catch (ObjectDisposedException)
@@ -88,9 +160,6 @@ namespace MomIsWatching.Subscriptions
                         }
                     }
                 }
-
-
-
             }
         }
 
