@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.WebSockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -59,7 +54,7 @@ namespace MomIsWatching.Subscriptions
                 var buffer = new ArraySegment<byte>(new byte[1024]);
 
                 // Ожидаем данные
-                var result = await socket.ReceiveAsync(buffer, CancellationToken.None);
+                await socket.ReceiveAsync(buffer, CancellationToken.None);
                 
 
                 //Передаём сообщение всем клиентам-картам
@@ -95,12 +90,6 @@ namespace MomIsWatching.Subscriptions
             }
         }
 
-        public bool IsReusable
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsReusable { get; } = false;
     }
 }

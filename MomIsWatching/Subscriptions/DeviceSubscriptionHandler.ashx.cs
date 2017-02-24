@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Net;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -59,7 +56,7 @@ namespace MomIsWatching.Subscriptions
             try
             {
                 // Смотрим, есть ли в базе такой девайс, если нет - добавляем в Devices
-                var devices = db.Devices.ToList<Device>().Where<Device>(x => x.DeviceId == rDeviceId).ToList();
+                var devices = db.Devices.ToList().Where(x => x.DeviceId == rDeviceId).ToList();
 
                 if (devices.Count == 0)
                 {
@@ -91,7 +88,7 @@ namespace MomIsWatching.Subscriptions
                 var buffer = new ArraySegment<byte>(new byte[1024]);
                 
                 // Ожидаем данные
-                var result = await deviceSocket.ReceiveAsync(buffer, CancellationToken.None);
+                await deviceSocket.ReceiveAsync(buffer, CancellationToken.None);
 
                 // TODO: нужно подумать, как красиво убрать хвост от массива из 1024 элементов
                 // Убираем пустые элементы массива (небольшой костыль)
@@ -163,12 +160,6 @@ namespace MomIsWatching.Subscriptions
             }
         }
 
-        public bool IsReusable
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsReusable { get; } = false;
     }
 }

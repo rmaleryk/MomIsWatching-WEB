@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.WebSockets;
-using Newtonsoft.Json;
-
+﻿
 namespace MomIsWatching.Models
 {
     public class Device

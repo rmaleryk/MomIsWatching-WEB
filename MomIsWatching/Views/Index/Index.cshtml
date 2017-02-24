@@ -26,7 +26,7 @@
 </head>
 <body>
     
-    <div style="position: absolute;background: white;z-index: 999;padding: 20px;border-radius: 5px;margin: 100px 10px 10px 10px;">
+    <div style="position: absolute;background: white;z-index: 999;padding: 20px; border-radius: 5px;margin: 100px 10px 10px 10px;">
         <table>
             @foreach (MomIsWatching.Models.Device device in Model.Devices)
             {
@@ -61,7 +61,9 @@
     </script>
 
     <script type="text/javascript">
-		var socket;
+
+        var socket;
+        var markers = [];
 
 		if (typeof (WebSocket) !== 'undefined') {
 			socket = new WebSocket("ws://momiswatching.azurewebsites.net/Subscriptions/MapSubscriptionHandler.ashx");
@@ -80,13 +82,60 @@
 		socket.onmessage = function (msg) {
 			var packet = JSON.parse(msg.data);
 
+		    //alert(msg.data.split('') + " - " + msg.data.length);
+
 			var myLatLng = { lat: parseFloat(packet.location.split(';')[0]), lng: parseFloat(packet.location.split(';')[1]) };
 
-			var marker = new google.maps.Marker({
-				position: myLatLng,
-				map: map,
-				title: 'Hello World!'
-			  });
+		    // Добавляем маркер для этого девайса, если его нет
+			if (markers[packet.deviceId] == null)
+			{
+			    markers[packet.deviceId] = [];
+
+                // Создаем кастомный пин и даем ему рандомный цвет
+			    var pinColor = getRandomColor();
+			    var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + pinColor,
+                    new google.maps.Size(21, 34),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(10, 34));
+
+			    var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+                    new google.maps.Size(40, 37),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(12, 35));
+
+			    markers[packet.deviceId]["marker"] = new google.maps.Marker({
+			        position: myLatLng,
+			        animation: google.maps.Animation.DROP,
+			        map: map,
+			        icon: pinImage,
+			        shadow: pinShadow
+			    });
+
+                // Слушатель нажатия на маркер
+			    markers[packet.deviceId]["marker"].addListener('click', function () {
+
+			        markers[packet.deviceId]["marker"].setAnimation(null);
+
+			        if (markers[packet.deviceId]["infoWindow"] != null)
+			            markers[packet.deviceId]["infoWindow"].open(map, markers[packet.deviceId]["marker"]);
+			    });
+
+			} else {
+			    // Если есть, то меняем местоположение
+			    markers[packet.deviceId]["marker"].setPosition(myLatLng);
+			}
+            
+            // Если сигнал SOS - ПРЫГАЕМ!!
+			if (packet.isSos == 1)
+            {
+			    markers[packet.deviceId]["marker"].setAnimation(google.maps.Animation.BOUNCE);
+            }
+
+			var contentString = "Charge: " + packet.charge + "<br>";
+
+			markers[packet.deviceId]["infoWindow"] = new google.maps.InfoWindow({
+			    content: contentString
+			});
 
 		};
 
@@ -98,8 +147,19 @@
 			  }
 		};
 
-    </script>
+		function getRandomColor() {
+		    var letters = '0123456789ABCDEF';
+		    var color = '';
+		    for (var i = 0; i < 6; i++) {
+		        color += letters[Math.floor(Math.random() * 16)];
+		    }
+		    return color;
+		}
 
+    </script>
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdfmTZPJ5Qmcdhk-IGcIdT-88MG7ycT4k&signed_in=true&callback=initMap"></script>
 
 </body>
