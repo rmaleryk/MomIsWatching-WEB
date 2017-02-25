@@ -1,0 +1,97 @@
+﻿html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, Arial, sans-serif;
+}
+
+#map {
+    height: 100%;
+}
+
+.devices_block {
+    position: absolute;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px;
+    z-index: 999;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 100px 10px 10px 10px;
+    opacity: 0.9;
+}
+
+.device_option {
+    margin-top: 1px;
+    width: 20px;
+    height: 20px;
+}
+
+.device_name {
+    margin-right: 50px;
+    display: inline;
+    vertical-align: super;
+}
+
+.rectangle {
+    counter-reset: li; 
+    list-style: none; 
+    font: 14px "Trebuchet MS", "Lucida Sans";
+    padding: 0;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+.rectangle a {
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em .8em;
+    border-top: 1px solid #e6e6e6;
+    background: white;
+    color: #444;
+    text-decoration: none;
+    transition: all .3s ease-out;
+}
+
+.rectangle a:hover {
+    background: #fafafa;
+}
+
+.close_block {
+    color: #777;
+    font: 14px/100% arial, sans-serif;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+    position:absolute;
+    top: 5px;
+    right: 5px;
+}
+		
+.close_block a {
+    text-decoration: none;
+}
+		
+.title {
+    margin-left:10px;
+}
+		
+.add_active {
+    text-decoration: none;		
+}
+		
+.rounded { 
+    border-radius:4px; 
+    -moz-border-radius:4px; 
+    -webkit-border-radius:4px; 	
+}
+
+.copyrights {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 3px;
+    padding: 8px;
+    margin: 6px;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px;
+    right: 0;
+    top: 0;
+    z-index: 99;
+    font-size: 13px;
+}

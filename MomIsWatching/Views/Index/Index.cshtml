@@ -11,37 +11,77 @@
     <title>Mom is watching!</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
 
-        #map {
-            height: 100%;
-        }
-    </style>
+    @Styles.Render("~/Content/style.css")
+    @Scripts.Render("~/bundles/jquery")
 
 </head>
 <body>
+    <div class="copyrights">
+        Web by Roman Maleryk (<a href="http://maleryk.xyz/" target="_blank">http://maleryk.xyz/</a>)
+    </div>
     
-    <div style="position: absolute;background: white;z-index: 999;padding: 20px; border-radius: 5px;margin: 100px 10px 10px 10px;">
-        <table>
+
+    <div id="home" class="devices_block">
+        Devices:
+        <ol class="rectangle">
             @foreach (MomIsWatching.Models.Device device in Model.Devices)
             {
-                <tr>
-                    <td><p>@device.Id</p></td>
-                    <td><p>@device.DeviceId</p></td>
-                    <td><p>@device.Name</p></td>
-                    <td><p>@device.Interval</p></td>
-                    <td><p>@device.Zones</p></td>
-                </tr>
+                <li>
+                    <a href="#" id="@device.Id">
+                        <div class="device_name"  onclick="deviceClicked(@device.Id)"> @device.Name (@device.Id) <img class="minimarker" width="13" style="vertical-align: text-bottom;"/></div>
+                        <img class="device_option" onClick="sosf(this);" src="/Content/img/sos.png">
+                        <img class="device_option" onClick="positionf(this);" src="/Content/img/route.png">
+                        <img class="device_option" onClick="zonesf(this);" src="/Content/img/zones.png">
+                        <img class="device_option" onClick="openSecondScreen();" src="/Content/img/settings.png">
+                    </a>
+                </li>
+                
             }
-        </table>
+        </ol>
     </div>
 
-    <!-- MAP CANVAS -->
+    
+
+    <div id="second_screen" class="devices_block" style="display:none">
+        <div class="close_block" style="position:absolute;top: 10%;">
+            <a href="#" onClick="openFirstScreen();">x</a>
+        </div>
+        <ol class="rectangle">
+            <li><p class="title">Device 1</p></li>
+            <li><a href="#">Update Time:</a><input type="text" class="rounded"></li>
+            <li><a href="#">Position:</a><input type="text" class="rounded"></li>
+            <li><a onClick="openThirdScreen();" href="#"><b>Active zones</b></a></li>
+            <li><a href="#"><b>Просто еще одна настройка</b></a></li>
+        </ol>
+
+
+    </div>
+    
+    <div id="third_screen" class="devices_block" style="display:none">
+        <div onClick="openSecondScreen();" class="close_block" style="position:absolute;top: 30px;">
+            <a href="#">x</a>
+        </div>
+        <ol id="zones" class="rectangle">
+            <li><p class="title">Active zones</p></li>
+            <li>
+                <div onClick="delActiveZone(this);" style="position: relative;margin: 0 0 0 200px;" >
+                    <p>-</p>
+                </div>
+                <a href="#"><b>Name:</b></a><input type="text" class="rounded">
+                <a href="#">Center:</a><input type="text" class="rounded">
+                <a href="#">Radius:</a><input type="text" class="rounded">
+            </li>
+        </ol>
+        <a onClick="addActionZone();" class="add_active" href="#"><p style="text-align: center;font-weight:bolder;"><b>+</b></p></a>
+
+
+    </div>
+
+
+   
+
+<!-- MAP CANVAS -->
     <div id="map"></div>
 
     <script type="text/javascript">
@@ -55,7 +95,7 @@
 			center: odessa,
 			zoom: 14
 		  });
-
+            
 		}
 
     </script>
@@ -80,62 +120,9 @@
 		//};
 
 		socket.onmessage = function (msg) {
-			var packet = JSON.parse(msg.data);
+		    var packet = JSON.parse(msg.data);
 
-		    //alert(msg.data.split('') + " - " + msg.data.length);
-
-			var myLatLng = { lat: parseFloat(packet.location.split(';')[0]), lng: parseFloat(packet.location.split(';')[1]) };
-
-		    // Добавляем маркер для этого девайса, если его нет
-			if (markers[packet.deviceId] == null)
-			{
-			    markers[packet.deviceId] = [];
-
-                // Создаем кастомный пин и даем ему рандомный цвет
-			    var pinColor = getRandomColor();
-			    var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + pinColor,
-                    new google.maps.Size(21, 34),
-                    new google.maps.Point(0, 0),
-                    new google.maps.Point(10, 34));
-
-			    var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
-                    new google.maps.Size(40, 37),
-                    new google.maps.Point(0, 0),
-                    new google.maps.Point(12, 35));
-
-			    markers[packet.deviceId]["marker"] = new google.maps.Marker({
-			        position: myLatLng,
-			        animation: google.maps.Animation.DROP,
-			        map: map,
-			        icon: pinImage,
-			        shadow: pinShadow
-			    });
-
-                // Слушатель нажатия на маркер
-			    markers[packet.deviceId]["marker"].addListener('click', function () {
-
-			        markers[packet.deviceId]["marker"].setAnimation(null);
-
-			        if (markers[packet.deviceId]["infoWindow"] != null)
-			            markers[packet.deviceId]["infoWindow"].open(map, markers[packet.deviceId]["marker"]);
-			    });
-
-			} else {
-			    // Если есть, то меняем местоположение
-			    markers[packet.deviceId]["marker"].setPosition(myLatLng);
-			}
-            
-            // Если сигнал SOS - ПРЫГАЕМ!!
-			if (packet.isSos == 1)
-            {
-			    markers[packet.deviceId]["marker"].setAnimation(google.maps.Animation.BOUNCE);
-            }
-
-			var contentString = "Charge: " + packet.charge + "<br>";
-
-			markers[packet.deviceId]["infoWindow"] = new google.maps.InfoWindow({
-			    content: contentString
-			});
+		    deviceSignIn(packet);
 
 		};
 
@@ -147,6 +134,89 @@
 			  }
 		};
 
+
+        // Загрузка последних местоположений девайсов
+		$.ajax({
+		    url: "/Index/GetDeviceLastPosition",
+		    cache: false,
+		    success: function (packet) {
+		        for (var i = 0; i < packet.length; i++)
+		        {
+		            deviceSignIn(packet[i]);
+                }
+		    }
+		});
+
+
+        function deviceSignIn(packet) {
+
+            console.log(packet);
+
+            var myLatLng = { lat: parseFloat(packet.Location.split(';')[0]), lng: parseFloat(packet.Location.split(';')[1]) };
+
+            // Добавляем маркер для этого девайса, если его нет
+            if (markers[packet.DeviceId] == null) {
+                markers[packet.DeviceId] = [];
+
+                // Создаем кастомный пин и даем ему рандомный цвет
+                var pinColor = getRandomColor();
+                var markerimg = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + pinColor;
+
+                var pinImage = new google.maps.MarkerImage(markerimg,
+                    new google.maps.Size(21, 34),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(10, 34));
+
+                var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+                    new google.maps.Size(40, 37),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(12, 35));
+
+                markers[packet.DeviceId]["marker"] = new google.maps.Marker({
+                    position: myLatLng,
+                    animation: google.maps.Animation.DROP,
+                    map: map,
+                    icon: pinImage,
+                    shadow: pinShadow
+                });
+
+                // Добавляем мини-маркер в список устройств
+                $("#" + packet.DeviceId).children(".device_name").children(".minimarker").attr("src", markerimg);
+
+
+                // Слушатель нажатия на маркер
+                markers[packet.DeviceId]["marker"].addListener('click', function () {
+                    markers[packet.DeviceId]["marker"].setAnimation(null);
+
+                    if (markers[packet.DeviceId]["infoWindow"] != null)
+                        markers[packet.DeviceId]["infoWindow"].open(map, markers[packet.DeviceId]["marker"]);
+                });
+
+            } else {
+                // Если есть, то меняем местоположение
+                markers[packet.DeviceId]["marker"].setPosition(myLatLng);
+            }
+
+            // Если сигнал SOS - ПРЫГАЕМ!!
+            if (packet.IsSos == 1) {
+                markers[packet.DeviceId]["marker"].setAnimation(google.maps.Animation.BOUNCE);
+            }
+
+            var contentString = "Charge: " + packet.Charge + "<br>";
+
+            markers[packet.DeviceId]["infoWindow"] = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+        }
+
+        function deviceClicked(marker) {
+            // Слушатель нажатия на девайс в списке
+
+            markers[marker]["marker"].setAnimation(google.maps.Animation.DROP);
+            map.panTo(markers[marker]["marker"].position);
+        }
+
 		function getRandomColor() {
 		    var letters = '0123456789ABCDEF';
 		    var color = '';
@@ -156,9 +226,32 @@
 		    return color;
 		}
 
+		function openSecondScreen() {
+		    $('#home').fadeOut();
+		    $('#third_screen').fadeOut();
+		    $('#second_screen').fadeIn();
+		}
+		function openFirstScreen() {
+		    $('#second_screen').fadeOut();
+		    $('#third_screen').fadeOut();
+		    $('#home').fadeIn();
+		}
+		function openThirdScreen() {
+		    $('#home').fadeOut();
+		    $('#second_screen').fadeOut();
+		    $('#third_screen').fadeIn();
+		}
+
+		function addActionZone() {
+		    $('#zones').append('<li><div style="position: relative;margin: 0px 0px 0 200px;" onClick="delActiveZone(this);" id="close" ><p >-</p> </div><a href="#"><b>Name:</b></a><input type="text" class="rounded"><a href="#">Center:</a><input type="text" class="rounded"><a href="#">Radius:</a><input type="text" class="rounded"></li>');
+		}
+
+		function delActiveZone(div) {
+		    div.parentElement.remove();
+		}
+
     </script>
     
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdfmTZPJ5Qmcdhk-IGcIdT-88MG7ycT4k&signed_in=true&callback=initMap"></script>
 
