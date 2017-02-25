@@ -64,7 +64,7 @@ namespace MomIsWatching.Subscriptions
                     if (db.Devices.ToList().Count > 0)
                         index = db.Devices.ToList().Last().Id + 1;
                     
-                    devices.Add(new Device() { Id = index, DeviceId = rDeviceId, Interval = 5000, Name = "NoName", Zones = ""} );
+                    devices.Add(new Device { Id = index, DeviceId = rDeviceId, Interval = 5, Name = "NoName", Zones = ""} );
 
                     db.Devices.AddOrUpdate(devices[0]);
                     // Коммитим изменения в БД
@@ -105,13 +105,13 @@ namespace MomIsWatching.Subscriptions
                     if (db.DeviceLogs.ToList().Count > 0)
                         index = db.DeviceLogs.ToList().Last().Id + 1;
 
-                    var log = new DeviceLog()
+                    var log = new DeviceLog
                     {
                         Id = index,
-                        DeviceId = onlineDevice.Instance.Id,
-                        Charge = deviceLog.charge,
-                        Location = deviceLog.location,
-                        IsSos = deviceLog.isSos,
+                        DeviceId = onlineDevice.Instance.Id.ToString(),
+                        Charge = deviceLog.Charge,
+                        Location = deviceLog.Location,
+                        IsSos = deviceLog.IsSos,
                         Time = DateTime.Now
                     };
 
@@ -157,6 +157,13 @@ namespace MomIsWatching.Subscriptions
                         }
                     }
                 }
+
+                // Отправляем конфигурацию обратно на девайс (интервал обновления)
+                db = new DeviceContext();
+                var tempDev = db.Devices.ToList().FirstOrDefault(x => x.Id == onlineDevice.Instance.Id);
+
+                if (tempDev != null)
+                    await deviceSocket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(tempDev.Interval.ToString())), WebSocketMessageType.Text, true, CancellationToken.None);
             }
         }
 

@@ -14,7 +14,7 @@
 
     @Styles.Render("~/Content/style.css")
     @Scripts.Render("~/bundles/jquery")
-
+    
 </head>
 <body>
     <div class="copyrights">
@@ -27,22 +27,12 @@
         <ol class="rectangle">
             @foreach (MomIsWatching.Models.Device device in Model.Devices)
             {
-                <li>
-                    <a href="#" id="@device.Id">
-                        <div class="device_name"  onclick="deviceClicked(@device.Id)"> @device.Name (@device.Id) <img class="minimarker" width="13" style="vertical-align: text-bottom;"/></div>
-                        <img class="device_option" onClick="sosf(this);" src="/Content/img/sos.png">
-                        <img class="device_option" onClick="positionf(this);" src="/Content/img/route.png">
-                        <img class="device_option" onClick="zonesf(this);" src="/Content/img/zones.png">
-                        <img class="device_option" onClick="openSecondScreen();" src="/Content/img/settings.png">
-                    </a>
-                </li>
-                
+                @Html.Partial("DeviceRow", device)
             }
         </ol>
     </div>
 
     
-
     <div id="second_screen" class="devices_block" style="display:none">
         <div class="close_block" style="position:absolute;top: 10%;">
             <a href="#" onClick="openFirstScreen();">x</a>
@@ -77,9 +67,7 @@
 
 
     </div>
-
-
-   
+ 
 
 <!-- MAP CANVAS -->
     <div id="map"></div>
@@ -105,25 +93,39 @@
         var socket;
         var markers = [];
 
-		if (typeof (WebSocket) !== 'undefined') {
-			socket = new WebSocket("ws://momiswatching.azurewebsites.net/Subscriptions/MapSubscriptionHandler.ashx");
-		} else {
-			socket = new MozWebSocket("ws://momiswatching.azurewebsites.net/Subscriptions/MapSubscriptionHandler.ashx");
-		}
+        if (typeof (WebSocket) !== 'undefined') {
+            socket = new WebSocket("ws://momiswatching.azurewebsites.net/Subscriptions/MapSubscriptionHandler.ashx");
+        } else {
+            socket = new MozWebSocket("ws://momiswatching.azurewebsites.net/Subscriptions/MapSubscriptionHandler.ashx");
+        }
 
-		//socket.onopen = function() {
-		//	alert("Соединение установлено.");
-		//};
+        //socket.onopen = function() {
+        //	alert("Соединение установлено.");
+        //};
 
-		//socket.onerror = function(error) {
-		//	alert("Ошибка " + error.message);
-		//};
+        //socket.onerror = function(error) {
+        //	alert("Ошибка " + error.message);
+        //};
 
-		socket.onmessage = function (msg) {
-		    var packet = JSON.parse(msg.data);
+        socket.onmessage = function(msg) {
+            var packet = JSON.parse(msg.data);
 
-		    deviceSignIn(packet);
+            // Добавляем в список девайсов, если его там нет
+            if (markers[packet.DeviceId] == null) {
 
+                $.ajax({
+                    url: '@Url.Action("DeviceRow", "Index")',
+		            success: function (data) {
+		                $('.rectangle').append(data);
+		                addMarker(packet); // Добавляем или обновляем маркер
+		                $("#" + packet.DeviceId).children(".device_name").children("#status").attr("class", "online");
+		            }
+		        });
+            }
+            else {
+                addMarker(packet); // Добавляем или обновляем маркер
+                $("#" + packet.DeviceId).children(".device_name").children("#status").attr("class", "online");
+            }
 		};
 
 		socket.onclose = function (event) {
@@ -142,19 +144,26 @@
 		    success: function (packet) {
 		        for (var i = 0; i < packet.length; i++)
 		        {
-		            deviceSignIn(packet[i]);
+		            addMarker(packet[i]);
                 }
 		    }
 		});
 
+        // TODO Реализовать отображения оффлайн устройств по проверке последнего обновления и их интервалов
+        // Делаем через некоторое время устройства оффлайн
+        // Пока что примитивно, но так...
+		setInterval(function () {
+		    
+		    $("*").children(".device_name").children("#status").attr("class", "offline");
 
-        function deviceSignIn(packet) {
+		}, 30000);
 
-            console.log(packet);
+        function addMarker(packet) {
 
             var myLatLng = { lat: parseFloat(packet.Location.split(';')[0]), lng: parseFloat(packet.Location.split(';')[1]) };
 
             // Добавляем маркер для этого девайса, если его нет
+            //console.log(packet.DeviceId + " " +markers[packet.DeviceId]);
             if (markers[packet.DeviceId] == null) {
                 markers[packet.DeviceId] = [];
 
@@ -183,7 +192,6 @@
                 // Добавляем мини-маркер в список устройств
                 $("#" + packet.DeviceId).children(".device_name").children(".minimarker").attr("src", markerimg);
 
-
                 // Слушатель нажатия на маркер
                 markers[packet.DeviceId]["marker"].addListener('click', function () {
                     markers[packet.DeviceId]["marker"].setAnimation(null);
@@ -197,13 +205,22 @@
                 markers[packet.DeviceId]["marker"].setPosition(myLatLng);
             }
 
-            // Если сигнал SOS - ПРЫГАЕМ!!
+            // Сохраняем последний пакет (на всякий случай)
+            var now = new Date;
+            var utcTimestamp = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
+                                now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+            packet.Time = utcTimestamp;
+            markers[packet.DeviceId]["lastPacket"] = packet;
+
+            var contentString = ""; // Текст информационного окна
+
+            // Если сигнал SOS - ПРЫГАЕМ!!, добавляем строчку в информационное окно
             if (packet.IsSos == 1) {
                 markers[packet.DeviceId]["marker"].setAnimation(google.maps.Animation.BOUNCE);
+                contentString += "<img class='device_option' src='/Content/img/sos.png' /> <u style='vertical-align: super;'>SOS Request!</u><br>";
             }
 
-            var contentString = "Charge: " + packet.Charge + "<br>";
-
+            contentString += "Charge: " + packet.Charge + "%<br>";
             markers[packet.DeviceId]["infoWindow"] = new google.maps.InfoWindow({
                 content: contentString
             });
@@ -252,8 +269,8 @@
 
     </script>
     
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdfmTZPJ5Qmcdhk-IGcIdT-88MG7ycT4k&signed_in=true&callback=initMap"></script>
-
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+   
 </body>
 </html>

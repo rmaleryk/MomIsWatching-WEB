@@ -2,12 +2,13 @@
 using System.Linq;
 using System.Web.Mvc;
 using MomIsWatching.Models;
+using DeviceContext = MomIsWatching.Models.DeviceContext;
 
 namespace MomIsWatching.Controllers
 {
     public class IndexController : Controller
     {
-        private DeviceContext DbContext { get; } = new DeviceContext();
+        private DeviceContext DbContext { get; set; } = new DeviceContext();
 
         // GET: Home
         public ActionResult Index()
@@ -17,32 +18,42 @@ namespace MomIsWatching.Controllers
 
         public ActionResult DeviceLastPosition()
         {
-            List<DeviceLog> devices = new List<DeviceLog>(); 
+            var devices = new List<DeviceLog>(); 
 
             if(DbContext.DeviceLogs.ToList().Any())
             {
-                foreach (Device device in DbContext.Devices.ToList())
+                foreach (var device in DbContext.Devices.ToList())
                 {
-                   devices.Add(DbContext.DeviceLogs.ToList().Last(x => x.DeviceId == device.Id));
+                   devices.Add(DbContext.DeviceLogs.ToList().Last(x => x.DeviceId == device.Id.ToString()));
                 }
             }
             
             return PartialView(devices);
         }
 
+        public ActionResult DeviceRow()
+        {
+
+            return PartialView(DbContext.Devices.ToList().Last());
+        }
+
         public JsonResult GetDeviceLastPosition()
         {
 
-            List<DeviceLog> devices = new List<DeviceLog>();
+            var devices = new List<DeviceLog>();
+            DbContext = new DeviceContext();
 
             if (DbContext.DeviceLogs.ToList().Any())
             {
-                foreach (Device device in DbContext.Devices.ToList())
+                foreach (var device in DbContext.Devices.ToList())
                 {
-                    List<DeviceLog> temp = DbContext.DeviceLogs.ToList().Where(x => x.DeviceId == device.Id).ToList();
+                    var temp = DbContext.DeviceLogs.ToList().Where(x => x.DeviceId == device.Id.ToString()).ToList();
 
                     if (temp.Any())
+                    {
+                        temp.Last().DeviceId = device.DeviceId;
                         devices.Add(temp.Last());
+                    }
                 }
             }
 

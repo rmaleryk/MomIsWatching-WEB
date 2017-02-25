@@ -10,9 +10,9 @@ namespace MomIsWatching
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Index",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Index", action = "Index", id = UrlParameter.Optional }
+                "Index",
+                "{controller}/{action}/{id}",
+                new { controller = "Index", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

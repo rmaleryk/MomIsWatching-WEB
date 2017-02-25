@@ -95,3 +95,25 @@
     z-index: 99;
     font-size: 13px;
 }
+
+.online {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: #11fb11;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.offline {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: #ff5605;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    margin-right: 5px;
+    vertical-align: middle;
+}

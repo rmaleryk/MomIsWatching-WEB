@@ -4,33 +4,29 @@
   <Information>
     <Solution>MomIsWatching.sln</Solution>
     <InspectionScope>
-      <Element>B05F0746-D9B0-42D8-8D0B-9D85BF122F01</Element>
+      <Element>Solution</Element>
     </InspectionScope>
   </Information>
   <IssueTypes>
-    <IssueType Id="ArgumentsStyleLiteral" Category="Code Style" CategoryId="CodeStyleIssues" Description="Use prefered argument style for literal values" Severity="HINT" />
-    <IssueType Id="ArgumentsStyleOther" Category="Code Style" CategoryId="CodeStyleIssues" Description="Use prefered argument style" Severity="HINT" />
-    <IssueType Id="ArgumentsStyleStringLiteral" Category="Code Style" CategoryId="CodeStyleIssues" Description="Use prefered argument style for string literal values" Severity="HINT" />
+    <IssueType Id="ClassNeverInstantiated.Global" Category="Potential Code Quality Issues" CategoryId="CodeSmell" SubCategory="Class is never instantiated" Description="Class is never instantiated: Non-private accessibility" Severity="SUGGESTION" Global="True" />
     <IssueType Id="CoercedEqualsUsing" Category="Potential Code Quality Issues" CategoryId="CodeSmell" SubCategory="Using of coerced equality" Description="Using of coerced equality: Using of coerced equality operator" Severity="WARNING" />
     <IssueType Id="CssBrowserCompatibility" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="CSS symbol / syntax is not compatible with a specific browser" Severity="WARNING" />
     <IssueType Id="InvertIf" Category="Language Usage Opportunities" CategoryId="LanguageUsage" Description="Invert 'if' statement to reduce nesting" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=InvertIf" />
     <IssueType Id="LoopCanBeConvertedToQuery" Category="Language Usage Opportunities" CategoryId="LanguageUsage" Description="Loop can be converted into LINQ-expression" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=LoopCanBeConvertedToQuery" />
     <IssueType Id="MemberCanBeMadeStatic.Local" Category="Common Practices and Code Improvements" CategoryId="BestPractice" SubCategory="Member can be made static(shared)" Description="Member can be made static(shared): Private accessibility" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=MemberCanBeMadeStatic.Local" />
-    <IssueType Id="MissingAltAttributeInImgTag" Category="Common Practices and Code Improvements" CategoryId="BestPractice" SubCategory="Important tags or attributes missing" Description="Important tags or attributes missing: &lt;img&gt; should specify alternative text" Severity="HINT" />
     <IssueType Id="PossiblyUnassignedProperty" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="Use of possibly unassigned property or global variable" Severity="HINT" />
     <IssueType Id="RedundantEmptyObjectCreationArgumentList" Category="Redundancies in Code" CategoryId="CodeRedundancy" Description="Redundant empty argument list on object creation expression" Severity="HINT" />
-    <IssueType Id="ScriptTagWithContentBeforeIncludes" Category="Potential Code Quality Issues" CategoryId="CodeSmell" SubCategory="Script tag errors" Description="Script tag errors: &lt;script&gt; with content before included &lt;script&gt;" Severity="HINT" />
     <IssueType Id="SuggestVarOrType_BuiltInTypes" Category="Code Style" CategoryId="CodeStyleIssues" SubCategory="Use preferred 'var' style" Description="Use preferred 'var' style: For built-in types" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=SuggestVarOrType_BuiltInTypes" />
-    <IssueType Id="SuggestVarOrType_Elsewhere" Category="Code Style" CategoryId="CodeStyleIssues" SubCategory="Use preferred 'var' style" Description="Use preferred 'var' style: Elsewhere" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=SuggestVarOrType_Elsewhere" />
     <IssueType Id="SuggestVarOrType_SimpleTypes" Category="Code Style" CategoryId="CodeStyleIssues" SubCategory="Use preferred 'var' style" Description="Use preferred 'var' style: When type is simple" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=SuggestVarOrType_SimpleTypes" />
     <IssueType Id="UnknownCssClass" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="Unknown CSS class" Severity="WARNING" />
+    <IssueType Id="UnusedAutoPropertyAccessor.Global" Category="Potential Code Quality Issues" CategoryId="CodeSmell" SubCategory="Auto-property accessor is never used" Description="Auto-property accessor is never used: Non-private accessibility" Severity="WARNING" Global="True" />
     <IssueType Id="UseOfImplicitGlobalInFunctionScope" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="Use of implicitly declared global variable" Severity="WARNING" />
   </IssueTypes>
   <Issues>
     <Project Name="MomIsWatching">
-      <Issue TypeId="ArgumentsStyleStringLiteral" File="MomIsWatching\App_Start\RouteConfig.cs" Offset="306-311" Line="13" Message="Inconsistent argument style: redundant name identifier" />
-      <Issue TypeId="ArgumentsStyleStringLiteral" File="MomIsWatching\App_Start\RouteConfig.cs" Offset="338-342" Line="14" Message="Inconsistent argument style: redundant name identifier" />
-      <Issue TypeId="ArgumentsStyleOther" File="MomIsWatching\App_Start\RouteConfig.cs" Offset="390-399" Line="15" Message="Inconsistent argument style: redundant name identifier" />
+      <Issue TypeId="ClassNeverInstantiated.Global" File="MomIsWatching\App_Start\BundleConfig.cs" Offset="79-91" Line="5" Message="Class 'BundleConfig' is never instantiated" />
+      <Issue TypeId="ClassNeverInstantiated.Global" File="MomIsWatching\App_Start\FilterConfig.cs" Offset="70-82" Line="5" Message="Class 'FilterConfig' is never instantiated" />
+      <Issue TypeId="ClassNeverInstantiated.Global" File="MomIsWatching\App_Start\RouteConfig.cs" Offset="97-108" Line="6" Message="Class 'RouteConfig' is never instantiated" />
       <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="231-235" Line="15" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
       <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="315-328" Line="18" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
       <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="375-382" Line="20" Message="The property 'opacity' is not compatible with Internet Explorer 8.0" />
@@ -40,91 +36,89 @@
       <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1554-1558" Line="88" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
       <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1585-1598" Line="89" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
       <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1659-1663" Line="92" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
-      <Issue TypeId="SuggestVarOrType_Elsewhere" File="MomIsWatching\Controllers\IndexController.cs" Offset="471-486" Line="20" Message="Use 'var' (elsewhere)" />
-      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="536-538" Line="22" Message="Invert 'if' statement to reduce nesting" />
-      <Issue TypeId="LoopCanBeConvertedToQuery" File="MomIsWatching\Controllers\IndexController.cs" Offset="608-615" Line="24" Message="Loop can be converted into LINQ-expression" />
-      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Controllers\IndexController.cs" Offset="617-623" Line="24" Message="Use 'var' (simple types)" />
-      <Issue TypeId="SuggestVarOrType_Elsewhere" File="MomIsWatching\Controllers\IndexController.cs" Offset="960-975" Line="36" Message="Use 'var' (elsewhere)" />
-      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="1024-1026" Line="38" Message="Invert 'if' statement to reduce nesting" />
-      <Issue TypeId="LoopCanBeConvertedToQuery" File="MomIsWatching\Controllers\IndexController.cs" Offset="1097-1104" Line="40" Message="Loop can be converted into LINQ-expression" />
-      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Controllers\IndexController.cs" Offset="1106-1112" Line="40" Message="Use 'var' (simple types)" />
-      <Issue TypeId="SuggestVarOrType_Elsewhere" File="MomIsWatching\Controllers\IndexController.cs" Offset="1191-1206" Line="42" Message="Use 'var' (elsewhere)" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1877-1890" Line="104" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1921-1925" Line="105" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="2106-2119" Line="115" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="2150-2154" Line="116" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="588-590" Line="23" Message="Invert 'if' statement to reduce nesting" />
+      <Issue TypeId="LoopCanBeConvertedToQuery" File="MomIsWatching\Controllers\IndexController.cs" Offset="660-667" Line="25" Message="Loop can be converted into LINQ-expression" />
+      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="1253-1255" Line="46" Message="Invert 'if' statement to reduce nesting" />
+      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="1538-1540" Line="52" Message="Invert 'if' statement to reduce nesting" />
+      <Issue TypeId="ClassNeverInstantiated.Global" File="MomIsWatching\Models\Clients.cs" Offset="119-126" Line="6" Message="Class 'Clients' is never instantiated" />
+      <Issue TypeId="UnusedAutoPropertyAccessor.Global" File="MomIsWatching\Models\Clients.cs" Offset="459-463" Line="16" Message="Auto-property accessor is never used" />
+      <Issue TypeId="UnusedAutoPropertyAccessor.Global" File="MomIsWatching\Models\Clients.cs" Offset="509-513" Line="17" Message="Auto-property accessor is never used" />
+      <Issue TypeId="UnusedAutoPropertyAccessor.Global" File="MomIsWatching\Models\DeviceContext.cs" Offset="159-163" Line="7" Message="Auto-property accessor is never used" />
+      <Issue TypeId="UnusedAutoPropertyAccessor.Global" File="MomIsWatching\Models\DeviceContext.cs" Offset="217-221" Line="8" Message="Auto-property accessor is never used" />
       <Issue TypeId="MemberCanBeMadeStatic.Local" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="1079-1095" Line="40" Message="Method 'WebSocketRequest' can be made static" />
       <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="1322-1328" Line="46" Message="Use 'var' (built-in types)" />
       <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="1996-1999" Line="63" Message="Use 'var' (built-in types)" />
-      <Issue TypeId="RedundantEmptyObjectCreationArgumentList" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="2200-2202" Line="67" Message="Empty argument list is redundant" />
-      <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="3495-3498" Line="104" Message="Use 'var' (built-in types)" />
-      <Issue TypeId="RedundantEmptyObjectCreationArgumentList" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="3686-3688" Line="108" Message="Empty argument list is redundant" />
-      <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="4711-4714" Line="134" Message="Use 'var' (built-in types)" />
+      <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="3490-3493" Line="104" Message="Use 'var' (built-in types)" />
+      <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="4715-4718" Line="134" Message="Use 'var' (built-in types)" />
       <Issue TypeId="MemberCanBeMadeStatic.Local" File="MomIsWatching\Subscriptions\MapSubscriptionHandler.ashx.cs" Offset="920-936" Line="35" Message="Method 'WebSocketRequest' can be made static" />
       <Issue TypeId="RedundantEmptyObjectCreationArgumentList" File="MomIsWatching\Subscriptions\MapSubscriptionHandler.ashx.cs" Offset="1269-1271" Line="44" Message="Empty argument list is redundant" />
       <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Views\Home\Index.cshtml" Offset="202-229" Line="11" Message="Use 'var' (simple types)" />
       <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Views\Home\Index.cshtml" Offset="622-652" Line="25" Message="Use 'var' (simple types)" />
-      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Views\Index\DeviceLastPosition.cshtml" Offset="106-136" Line="5" Message="Use 'var' (simple types)" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceLastPosition.cshtml" Offset="248-260" Line="9" Message="Property or global variable 'deviceSignIn' is possibly never assigned" />
-      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Views\Index\Index.cshtml" Offset="632-659" Line="28" Message="Use 'var' (simple types)" />
-      <Issue TypeId="MissingAltAttributeInImgTag" File="MomIsWatching\Views\Index\Index.cshtml" Offset="887-890" Line="32" Message="&lt;img&gt; should specify alternative text" />
-      <Issue TypeId="UnknownCssClass" File="MomIsWatching\Views\Index\Index.cshtml" Offset="898-908" Line="32" Message="Unknown CSS class 'minimarker'" />
-      <Issue TypeId="MissingAltAttributeInImgTag" File="MomIsWatching\Views\Index\Index.cshtml" Offset="992-995" Line="33" Message="&lt;img&gt; should specify alternative text" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="1027-1031" Line="33" Message="Property or global variable 'sosf' is possibly never assigned" />
-      <Issue TypeId="MissingAltAttributeInImgTag" File="MomIsWatching\Views\Index\Index.cshtml" Offset="1094-1097" Line="34" Message="&lt;img&gt; should specify alternative text" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="1129-1138" Line="34" Message="Property or global variable 'positionf' is possibly never assigned" />
-      <Issue TypeId="MissingAltAttributeInImgTag" File="MomIsWatching\Views\Index\Index.cshtml" Offset="1203-1206" Line="35" Message="&lt;img&gt; should specify alternative text" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="1238-1244" Line="35" Message="Property or global variable 'zonesf' is possibly never assigned" />
-      <Issue TypeId="MissingAltAttributeInImgTag" File="MomIsWatching\Views\Index\Index.cshtml" Offset="1309-1312" Line="36" Message="&lt;img&gt; should specify alternative text" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3270-3276" Line="92" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3277-3281" Line="92" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3282-3288" Line="92" Message="Property or global variable 'LatLng' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3329-3335" Line="94" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3336-3340" Line="94" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3341-3344" Line="94" Message="Property or global variable 'Map' is possibly never assigned" />
-      <Issue TypeId="ScriptTagWithContentBeforeIncludes" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3465-3471" Line="103" Message="&lt;script&gt; with content before included &lt;script&gt;" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3732-3744" Line="111" Message="Property or global variable 'MozWebSocket' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5299-5305" Line="165" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5306-5310" Line="165" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5311-5322" Line="165" Message="Property or global variable 'MarkerImage' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5359-5365" Line="166" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5366-5370" Line="166" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5371-5375" Line="166" Message="Property or global variable 'Size' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5410-5416" Line="167" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5417-5421" Line="167" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5422-5427" Line="167" Message="Property or global variable 'Point' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5460-5466" Line="168" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5467-5471" Line="168" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5472-5477" Line="168" Message="Property or global variable 'Point' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5527-5533" Line="170" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5534-5538" Line="170" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5539-5550" Line="170" Message="Property or global variable 'MarkerImage' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5636-5642" Line="171" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5643-5647" Line="171" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5648-5652" Line="171" Message="Property or global variable 'Size' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5687-5693" Line="172" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5694-5698" Line="172" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5699-5704" Line="172" Message="Property or global variable 'Point' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5737-5743" Line="173" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5744-5748" Line="173" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5749-5754" Line="173" Message="Property or global variable 'Point' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5825-5831" Line="175" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5832-5836" Line="175" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5837-5843" Line="175" Message="Property or global variable 'Marker' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5919-5925" Line="177" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5926-5930" Line="177" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5941-5945" Line="177" Message="Property or global variable 'DROP' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6448-6460" Line="189" Message="Property or global variable 'setAnimation' is possibly never assigned" />
-      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6921-6923" Line="201" Message="'==' tries to coerce values before comparing them which can lead to some unexpected results" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6981-6993" Line="202" Message="Property or global variable 'setAnimation' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6994-7000" Line="202" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7001-7005" Line="202" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7016-7022" Line="202" Message="Property or global variable 'BOUNCE' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7172-7178" Line="207" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7179-7183" Line="207" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7184-7194" Line="207" Message="Property or global variable 'InfoWindow' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7405-7417" Line="216" Message="Property or global variable 'setAnimation' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7418-7424" Line="216" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7425-7429" Line="216" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7440-7444" Line="216" Message="Property or global variable 'DROP' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7464-7469" Line="217" Message="Property or global variable 'panTo' is possibly never assigned" />
-      <Issue TypeId="ArgumentsStyleLiteral" File="MomIsWatching\Views\Shared\_Layout.cshtml" Offset="1359-1368" Line="38" Message="Inconsistent argument style: redundant name identifier" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="125-138" Line="5" Message="Property or global variable 'deviceClicked' is possibly never assigned" />
+      <Issue TypeId="UnknownCssClass" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="332-342" Line="8" Message="Unknown CSS class 'minimarker'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="500-504" Line="10" Message="Property or global variable 'sosf' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="634-643" Line="11" Message="Property or global variable 'positionf' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="770-776" Line="12" Message="Property or global variable 'zonesf' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="898-914" Line="13" Message="Property or global variable 'openSecondScreen' is possibly never assigned" />
+      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Views\Index\Index.cshtml" Offset="636-663" Line="28" Message="Use 'var' (simple types)" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2553-2559" Line="80" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2560-2564" Line="80" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2565-2571" Line="80" Message="Property or global variable 'LatLng' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2612-2618" Line="82" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2619-2623" Line="82" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2624-2627" Line="82" Message="Property or global variable 'Map' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3045-3057" Line="99" Message="Property or global variable 'MozWebSocket' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3552-3560" Line="114" Message="Property or global variable 'DeviceId' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3861-3869" Line="121" Message="Property or global variable 'DeviceId' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="4110-4118" Line="127" Message="Property or global variable 'DeviceId' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5766-5772" Line="174" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5773-5777" Line="174" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5778-5789" Line="174" Message="Property or global variable 'MarkerImage' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5826-5832" Line="175" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5833-5837" Line="175" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5838-5842" Line="175" Message="Property or global variable 'Size' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5877-5883" Line="176" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5884-5888" Line="176" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5889-5894" Line="176" Message="Property or global variable 'Point' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5927-5933" Line="177" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5934-5938" Line="177" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5939-5944" Line="177" Message="Property or global variable 'Point' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5994-6000" Line="179" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6001-6005" Line="179" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6006-6017" Line="179" Message="Property or global variable 'MarkerImage' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6103-6109" Line="180" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6110-6114" Line="180" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6115-6119" Line="180" Message="Property or global variable 'Size' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6154-6160" Line="181" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6161-6165" Line="181" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6166-6171" Line="181" Message="Property or global variable 'Point' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6204-6210" Line="182" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6211-6215" Line="182" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6216-6221" Line="182" Message="Property or global variable 'Point' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6292-6298" Line="184" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6299-6303" Line="184" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6304-6310" Line="184" Message="Property or global variable 'Marker' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6386-6392" Line="186" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6393-6397" Line="186" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6408-6412" Line="186" Message="Property or global variable 'DROP' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6913-6925" Line="197" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7916-7918" Line="218" Message="'==' tries to coerce values before comparing them which can lead to some unexpected results" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7976-7988" Line="219" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7989-7995" Line="219" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7996-8000" Line="219" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8011-8017" Line="219" Message="Property or global variable 'BOUNCE' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8312-8318" Line="224" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8319-8323" Line="224" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8324-8334" Line="224" Message="Property or global variable 'InfoWindow' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8545-8557" Line="233" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8558-8564" Line="233" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8565-8569" Line="233" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8580-8584" Line="233" Message="Property or global variable 'DROP' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8604-8609" Line="234" Message="Property or global variable 'panTo' is possibly never assigned" />
     </Project>
   </Issues>
 </Report>
