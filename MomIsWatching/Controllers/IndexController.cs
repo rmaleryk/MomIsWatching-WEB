@@ -60,6 +60,49 @@ namespace MomIsWatching.Controllers
             return Json(devices, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetSosMarkers(string id)
+        {
+
+            var devices = new List<DeviceLog>();
+            DbContext = new DeviceContext();
+
+            if (DbContext.DeviceLogs.ToList().Any())
+            {
+                var deviceId = DbContext.Devices.ToList().FirstOrDefault(x1 => x1.DeviceId == id)?.Id;
+
+                devices = DbContext.DeviceLogs.ToList().Where(x => deviceId != null && (x.DeviceId == deviceId.ToString() && x.IsSos)).ToList();
+                devices.ForEach(x => x.DeviceId = id);
+            }
+
+            return Json(devices, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetMarkers(string id)
+        {
+
+            var devices = new List<DeviceLog>();
+            DbContext = new DeviceContext();
+
+            if (DbContext.DeviceLogs.ToList().Any())
+            {
+                var deviceId = DbContext.Devices.ToList().FirstOrDefault(x1 => x1.DeviceId == id)?.Id;
+
+                devices = DbContext.DeviceLogs.ToList().Where(x => deviceId != null && (x.DeviceId == deviceId.ToString())).ToList();
+                devices.ForEach(x => x.DeviceId = id);
+            }
+
+            return Json(devices, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetZones(string id)
+        {
+            DbContext = new DeviceContext();
+
+            string zones = DbContext.Devices.ToList().FirstOrDefault(x1 => x1.DeviceId == id)?.Zones;
+
+            return Json(zones, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             DbContext.Dispose();

@@ -117,3 +117,7 @@
     margin-right: 5px;
     vertical-align: middle;
 }
+
+.disabled {  
+    -webkit-filter: grayscale(100%);  
+} 

@@ -92,6 +92,9 @@
 
         var socket;
         var markers = [];
+        var sosMarkers = [];
+        var routeMarkers = [];
+        var zones = [];
 
         if (typeof (WebSocket) !== 'undefined') {
             socket = new WebSocket("ws://momiswatching.azurewebsites.net/Subscriptions/MapSubscriptionHandler.ashx");
@@ -139,7 +142,7 @@
 
         // Загрузка последних местоположений девайсов
 		$.ajax({
-		    url: "/Index/GetDeviceLastPosition",
+		    url: '@Url.Action("GetDeviceLastPosition", "Index")',
 		    cache: false,
 		    success: function (packet) {
 		        for (var i = 0; i < packet.length; i++)
@@ -153,7 +156,7 @@
         // Делаем через некоторое время устройства оффлайн
         // Пока что примитивно, но так...
 		setInterval(function () {
-		    
+
 		    $("*").children(".device_name").children("#status").attr("class", "offline");
 
 		}, 30000);
@@ -257,6 +260,216 @@
 		    $('#home').fadeOut();
 		    $('#second_screen').fadeOut();
 		    $('#third_screen').fadeIn();
+		}
+
+		function sosf(img) {
+		    if (img.classList.contains("disabled")) {
+		        img.classList.remove("disabled");
+
+		        sosMarkers[img.parentNode.id] = [];
+
+		        $.ajax({
+		            url: '@Url.Action("GetSosMarkers", "Index")',
+                    data: { "id": img.parentNode.id },
+                    cache: false,
+                    success: function(packet) {
+
+                        for (var i = 0; i < packet.length; i++) {
+
+                            var current = packet[i];
+                            sosMarkers[current.DeviceId][i] = [];
+
+                            var myLatLng = {
+                                lat: parseFloat(current.Location.split(';')[0]),
+                                lng: parseFloat(current.Location.split(';')[1])
+                            };
+
+                            sosMarkers[current.DeviceId][i]["marker"] = new google.maps.Marker({
+                                position: myLatLng,
+                                //animation: google.maps.Animation.DROP,
+                                map: map,
+                                icon: markers[current.DeviceId]["marker"].icon
+                            });
+
+                            sosMarkers[current.DeviceId][i]["marker"].setOpacity(0.7);
+
+                            // Слушатель нажатия на маркер
+                            sosMarkers[current.DeviceId][i]["marker"].addListener('click',
+                                function() {
+
+                                    var marker;
+                                    for (var i = 0; i < sosMarkers[img.parentNode.id].length; i++) {
+                                        if (sosMarkers[img.parentNode.id][i]["marker"] == this) {
+                                            marker = sosMarkers[img.parentNode.id][i];
+                                        }
+                                    }
+
+                                    if (marker["infoWindow"] != null)
+                                        marker["infoWindow"].open(map, marker["marker"]);
+                                });
+
+                            var contentString =
+                                "<img class='device_option' src='/Content/img/sos.png' /> <u style='vertical-align: super;'>SOS Request!</u><br>" + "Charge: " + current.Charge + "%<br>";
+
+                            sosMarkers[current.DeviceId][i]["infoWindow"] = new google.maps.InfoWindow({
+                                content: contentString
+                            });
+
+                        }
+
+                    }
+                });
+
+            } else {
+                img.classList.add("disabled");
+
+                // Удаление маркеров
+                for (var i = 0; i < sosMarkers[img.parentNode.id].length; i++) {
+
+                    sosMarkers[img.parentNode.id][i]["marker"].setMap(null);
+                    sosMarkers[img.parentNode.id][i]["marker"] = null;
+                    sosMarkers[img.parentNode.id][i] = null;
+                }
+            }
+        }
+
+        function zonesf(img) {
+            if (img.classList.contains("disabled")) {
+                img.classList.remove("disabled");
+
+                $.ajax({
+                    url: '@Url.Action("GetZones", "Index")',
+                    data: { "id": img.parentNode.id },
+                    cache: false,
+                    success: function(packet) {
+                        
+                        if (packet == "") return;
+
+                        packet = JSON.parse(packet);
+                        console.log(packet.center);
+                        console.log(packet.radius);
+
+                        var color = markers[img.parentNode.id]["marker"].icon.url.split('|')[1];
+                        var coordArr = (packet.center).split(";");
+                        var coord = { lat: parseFloat(coordArr[0]), lng: parseFloat(coordArr[1]) };
+                        zones[img.parentNode.id] = new google.maps.Circle({
+                            strokeColor: '#' + color,
+                            strokeOpacity: 0.9,
+                            strokeWeight: 2,
+                            fillColor: '#' + color,
+                            fillOpacity: 0.35,
+                            map: map,
+                            center: coord,
+                            radius: parseInt(packet.radius)
+                        });
+
+                    }
+                });
+
+            } else {
+                img.classList.add("disabled");
+
+                if (zones[img.parentNode.id] != null) {
+                    zones[img.parentNode.id].setMap(null);
+                    zones[img.parentNode.id] = null;
+                }
+            }
+		}
+
+		function positionf(img) {
+		    if (img.classList.contains("disabled")) {
+		        img.classList.remove("disabled");
+
+		        routeMarkers[img.parentNode.id] = [];
+
+		        $.ajax({
+		            url: '@Url.Action("GetMarkers", "Index")',
+		            data: { "id": img.parentNode.id },
+		            cache: false,
+		            success: function (packet) {
+
+		                for (var i = 0; i < packet.length; i++) {
+
+		                    var current = packet[i];
+		                    routeMarkers[current.DeviceId][i] = [];
+		                    
+		                    var myLatLng = { lat: parseFloat(current.Location.split(';')[0]), lng: parseFloat(current.Location.split(';')[1]) };
+
+		                    routeMarkers[current.DeviceId][i]["marker"] = new google.maps.Marker({
+		                        position: myLatLng,
+		                        //animation: google.maps.Animation.DROP,
+		                        map: map,
+		                        icon: markers[current.DeviceId]["marker"].icon
+		                    });
+
+		                    routeMarkers[current.DeviceId][i]["marker"].setOpacity(0.7);
+
+		                    // Слушатель нажатия на маркер
+		                    routeMarkers[current.DeviceId][i]["marker"].addListener('click', function () {
+
+		                        var marker;
+		                        for (var i = 0; i < routeMarkers[img.parentNode.id].length; i++) {
+		                            if (routeMarkers[img.parentNode.id][i]["marker"] == this) {
+		                                marker = routeMarkers[img.parentNode.id][i];
+		                            }
+		                        }
+
+		                        if (marker["infoWindow"] != null)
+		                            marker["infoWindow"].open(map, marker["marker"]);
+		                    });
+
+		                    var contentString = ""; // Текст информационного окна
+
+		                    // Если сигнал SOS - добавляем строчку в информационное окно
+		                    if (current.IsSos == 1) {
+		                        contentString += "<img class='device_option' src='/Content/img/sos.png' /> <u style='vertical-align: super;'>SOS Request!</u><br>";
+		                    }
+
+		                    contentString += "Charge: " + current.Charge + "%<br>";
+		                    routeMarkers[current.DeviceId][i]["infoWindow"] = new google.maps.InfoWindow({
+		                        content: contentString
+		                    });
+		                }
+
+		                // Рисуем линию на карте
+
+		                var line = [];
+
+		                routeMarkers[img.parentNode.id].forEach(function (item, i, arr) {
+		                    var coor = item["marker"].position;
+		                    line.push(coor);
+		                });
+
+		                var color = routeMarkers[img.parentNode.id][0]["marker"].icon.url.split('|')[1];
+
+		                routeMarkers[img.parentNode.id]["path"] = new google.maps.Polyline({
+		                    path: line,
+		                    geodesic: true,
+		                    strokeColor: '#' + color,
+		                    strokeOpacity: 1.0,
+		                    strokeWeight: 3
+		                });
+
+		                routeMarkers[img.parentNode.id]["path"].setMap(map);
+
+		            }
+		        });
+
+		    } else {
+		        img.classList.add("disabled");
+
+		        // Удаление маркеров и линии
+
+		        routeMarkers[img.parentNode.id]["path"].setMap(null);
+		        routeMarkers[img.parentNode.id]["path"] = null;
+
+		        for (var i = 0; i < routeMarkers[img.parentNode.id].length; i++) {
+
+		            routeMarkers[img.parentNode.id][i]["marker"].setMap(null);
+		            routeMarkers[img.parentNode.id][i]["marker"] = null;
+		            routeMarkers[img.parentNode.id][i] = null;
+		        }
+		    }
 		}
 
 		function addActionZone() {
