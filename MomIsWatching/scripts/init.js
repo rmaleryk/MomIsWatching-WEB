@@ -5,6 +5,8 @@ var markers = [];
 var sosMarkers = [];
 var routeMarkers = [];
 var zones = [];
+var zoneMarker = null;
+var zoneRadius = null;
 
 function initMap() {
     var odessa = new google.maps.LatLng(46.447416, 30.749160);
@@ -56,6 +58,49 @@ socket.onmessage = function (msg) {
         addMarker(packet); // Добавляем или обновляем маркер
         $("#" + packet.DeviceId).children(".device_name").children("#status").attr("class", "online");
     }
+
+    $.ajax({
+        url: '/Index/GetDeviceInfo',
+        data: { 'id': packet.DeviceId },
+        success: function (data) {
+
+            
+            if (data.Zones != "") {
+                var zones = JSON.parse(data.Zones);
+                
+                var pos = new google.maps.LatLng(
+                    parseFloat(zones.center.split(';')[0]),
+                    parseFloat(zones.center.split(';')[1])
+                );
+                var cityCircle = new google.maps.Circle({
+                    center: pos,
+                    fillOpacity: 0.0,
+                    radius: parseInt(zones.radius)
+                });
+                //var  bounds = cityCircle.getBounds()
+                var devicePos = new google.maps.LatLng(
+                    parseFloat(packet.Location.split(';')[0]),
+                    parseFloat(packet.Location.split(';')[1])
+                );
+                
+                var rez = null;
+                console.log(distHaversine(devicePos, pos) * 1000);
+                console.log(parseInt(zones.radius));
+                if (distHaversine(devicePos, pos) * 1000 < parseInt(zones.radius))
+                    $("#" + packet.DeviceId + " .device_name #name")[0].style.color = "#F00";
+                else
+                    $("#" + packet.DeviceId + " .device_name #name")[0].style.color = "#000";
+                
+
+                console.log(rez);
+            }
+
+        }
+    });
+    
+   
+
+
 };
 
 socket.onclose = function (event) {
@@ -210,6 +255,7 @@ function openFirstScreen() {
     console.log(JSON.stringify(device));
 
 
+
     $.ajax({
         url: '/Index/SaveSettings',
         //data: { "DeviceId": device["DeviceId"], "Name": device["Name"], "Interval": device["Interval"], "Zones": { "center": device["Zones"]["center"], "radius": device["Zones"]["radius"] } },
@@ -218,7 +264,10 @@ function openFirstScreen() {
         success: function (packet) {
 
             $("#" + device["DeviceId"]).children(".device_name").children("#name")[0].innerHTML = device["Name"];
-
+            zoneMarker.setMap(null);
+            zoneMarker = null;
+            zoneRadius.setMap(null);
+            zoneRadius = null;
         }
     });
 
@@ -242,6 +291,11 @@ function openSecondScreen(device) {
                 var zone = JSON.parse(data.Zones);
                 $("#second_screen .rectangle li .row #center")[0].value = zone.center;
                 $("#second_screen .rectangle li .row #radius")[0].value = zone.radius;
+                dropMarker({
+                    lat: parseFloat(zone.center.split(';')[0]),
+                    lng: parseFloat(zone.center.split(';')[1])
+                });
+
             } else {
                 $("#second_screen .rectangle li .row #center")[0].value = "";
                 $("#second_screen .rectangle li .row #radius")[0].value = "";
@@ -463,3 +517,74 @@ function positionf(img) {
         }
     }
 }
+
+function dropMarker(position) {
+    console.log(zoneMarker);
+    if (zoneMarker == null) {
+        if (position == null) {
+            var myLatLng = map.getCenter();
+        }
+        else {
+            var myLatLng = position;
+        }
+        zoneMarker = new google.maps.Marker({
+            position: myLatLng,
+            Map: map,
+            draggable: true
+        });
+        zoneMarker.setAnimation(google.maps.Animation.BOUNCE);
+        var infowindow = new google.maps.InfoWindow({
+            content: "Drag this marker to center of active zone"
+        });
+        infowindow.open(map, zoneMarker);
+        zoneRadius = drawRadius(myLatLng, $("#second_screen .rectangle li .row #radius")[0].value);
+        google.maps.event.addListener(zoneMarker, "dragend", function (event) {
+            zoneMarker.setAnimation(null);
+            var point = zoneMarker.getPosition();
+            zoneRadius.setCenter(point);
+            map.panTo(point);
+        });
+        google.maps.event.addListener(zoneMarker, "drag", function (event) {
+            zoneMarker.setAnimation(null);
+            var point = zoneMarker.getPosition();
+
+            $("#second_screen .rectangle li .row #center")[0].value = point.lat() + ";" + point.lng();
+            zoneRadius.setCenter(point);
+
+        });
+        ($("#second_screen .rectangle li .row #radius")).change(function () {
+            zoneRadius.setRadius(parseInt($("#second_screen .rectangle li .row #radius")[0].value));
+        });
+    }
+    else {
+        map.panTo(zoneMarker.position);
+    }
+}
+
+function drawRadius(point, radius) {
+    var cityCircle = new google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: map,
+        center: point,
+        radius: parseInt(radius)
+    });
+    return cityCircle;
+}
+
+function distHaversine(p1, p2) {
+    var R = 6371; // earth's mean radius in km
+    var dLat = rad(p2.lat() - p1.lat());
+    var dLong = rad(p2.lng() - p1.lng());
+
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+
+    return d.toFixed(3);
+}
+function rad (x) { return x * Math.PI / 180; }
