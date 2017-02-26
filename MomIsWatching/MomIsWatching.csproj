@@ -197,6 +197,7 @@
       <BrowseToURL>~/Index/Index</BrowseToURL>
     </Content>
     <Content Include="Views\Index\DeviceRow.cshtml" />
+    <Content Include="Views\Index\DeviceSettings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

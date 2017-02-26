@@ -42,10 +42,10 @@ socket.onmessage = function (msg) {
             success: function (data) {
 
                 // Загружаем частичное представление
-                $('.rectangle').append(data);
+                $('#home .rectangle').append(data);
 
                 // Добавляем или обновляем маркер
-                addMarker(packet); 
+                addMarker(packet);
 
                 // Ставим статус "онлайн" в списке девайсов
                 $("#" + packet.DeviceId).children(".device_name").children("#status").attr("class", "online");
@@ -140,7 +140,7 @@ function addMarker(packet) {
         var utcTimestamp = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
                             now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 
-        packet.Time = utcTimestamp;
+        packet.Time = utcTimestamp + "";
         
 
     }
@@ -165,11 +165,18 @@ function addMarker(packet) {
 
 }
 
-function deviceClicked(marker) {
+function deviceClicked(id) {
     // Слушатель нажатия на девайс в списке
 
-    markers[marker]["marker"].setAnimation(google.maps.Animation.DROP);
-    map.panTo(markers[marker]["marker"].position);
+    if (markers[id]["marker"].animation != null) {
+
+        markers[id]["marker"].setAnimation(google.maps.Animation.DROP);
+        markers[id]["marker"].setAnimation(google.maps.Animation.BOUNCE);
+    }
+    else
+        markers[id]["marker"].setAnimation(google.maps.Animation.DROP);
+
+    map.panTo(markers[id]["marker"].position);
 }
 
 function getRandomColor() {
@@ -181,31 +188,79 @@ function getRandomColor() {
     return color;
 }
 
-function openSecondScreen() {
-    $('#home').fadeOut();
-    $('#third_screen').fadeOut();
-    $('#second_screen').fadeIn();
-}
 function openFirstScreen() {
     $('#second_screen').fadeOut();
-    $('#third_screen').fadeOut();
     $('#home').fadeIn();
+
+    var device = {};
+
+    device["Id"] = -1;
+    device["DeviceId"] = $("#second_screen .rectangle li .row #deviceId")[0].value;
+    device["Name"] = $("#second_screen .rectangle li .row #name")[0].value;
+    device["Interval"] = parseInt($("#second_screen .rectangle li .row #interval")[0].value);
+
+    if ($("#second_screen .rectangle li .row #center")[0].value != "" &&
+        $("#second_screen .rectangle li .row #radius")[0].value != "") {
+        device["Zones"] = "{ \"center\" : \"" + $("#second_screen .rectangle li .row #center")[0].value +
+            "\", \"radius\" :" + parseInt($("#second_screen .rectangle li .row #radius")[0].value) + "}";
+    } else {
+        device["Zones"] = "";
+    }
+
+    console.log(JSON.stringify(device));
+
+
+    $.ajax({
+        url: '/Index/SaveSettings',
+        //data: { "DeviceId": device["DeviceId"], "Name": device["Name"], "Interval": device["Interval"], "Zones": { "center": device["Zones"]["center"], "radius": device["Zones"]["radius"] } },
+        data: { "device" : JSON.stringify(device) },
+        cache: false,
+        success: function (packet) {
+
+            $("#" + device["DeviceId"]).children(".device_name").children("#name")[0].innerHTML = device["Name"];
+
+        }
+    });
+
 }
-function openThirdScreen() {
+
+function openSecondScreen(device) {
     $('#home').fadeOut();
-    $('#second_screen').fadeOut();
-    $('#third_screen').fadeIn();
+    $('#second_screen').fadeIn();
+
+    $.ajax({
+        url: '/Index/GetDeviceInfo',
+        data: {'id' : device },
+        success: function (data) {
+
+            $("#second_screen .rectangle li .row #deviceId")[0].value = data.DeviceId;
+            $("#second_screen .rectangle li .row #name")[0].value = data.Name;
+            $("#second_screen .rectangle li .row #interval")[0].value = data.Interval;
+            $("#second_screen .rectangle li .row #position")[0].value = markers[device]["marker"].position;
+
+            if (data.Zones != "") {
+                var zone = JSON.parse(data.Zones);
+                $("#second_screen .rectangle li .row #center")[0].value = zone.center;
+                $("#second_screen .rectangle li .row #radius")[0].value = zone.radius;
+            } else {
+                $("#second_screen .rectangle li .row #center")[0].value = "";
+                $("#second_screen .rectangle li .row #radius")[0].value = "";
+            }
+
+        }
+    });
+
 }
 
 function sosf(img) {
     if (img.classList.contains("disabled")) {
         img.classList.remove("disabled");
 
-        sosMarkers[img.parentNode.id] = [];
+        sosMarkers[img.parentNode.parentNode.id] = [];
 
         $.ajax({
             url: '/Index/GetSosMarkers',
-            data: { "id": img.parentNode.id },
+            data: { "id": img.parentNode.parentNode.id },
             cache: false,
             success: function (packet) {
 
@@ -233,9 +288,9 @@ function sosf(img) {
                         function () {
 
                             var marker;
-                            for (var i = 0; i < sosMarkers[img.parentNode.id].length; i++) {
-                                if (sosMarkers[img.parentNode.id][i]["marker"] == this) {
-                                    marker = sosMarkers[img.parentNode.id][i];
+                            for (var i = 0; i < sosMarkers[img.parentNode.parentNode.id].length; i++) {
+                                if (sosMarkers[img.parentNode.parentNode.id][i]["marker"] == this) {
+                                    marker = sosMarkers[img.parentNode.parentNode.id][i];
                                 }
                             }
 
@@ -260,11 +315,11 @@ function sosf(img) {
         img.classList.add("disabled");
 
         // Удаление маркеров
-        for (var i = 0; i < sosMarkers[img.parentNode.id].length; i++) {
+        for (var i = 0; i < sosMarkers[img.parentNode.parentNode.id].length; i++) {
 
-            sosMarkers[img.parentNode.id][i]["marker"].setMap(null);
-            sosMarkers[img.parentNode.id][i]["marker"] = null;
-            sosMarkers[img.parentNode.id][i] = null;
+            sosMarkers[img.parentNode.parentNode.id][i]["marker"].setMap(null);
+            sosMarkers[img.parentNode.parentNode.id][i]["marker"] = null;
+            sosMarkers[img.parentNode.parentNode.id][i] = null;
         }
     }
 }
@@ -275,7 +330,7 @@ function zonesf(img) {
 
         $.ajax({
             url: '/Index/GetZones',
-            data: { "id": img.parentNode.id },
+            data: { "id": img.parentNode.parentNode.id },
             cache: false,
             success: function (packet) {
 
@@ -285,10 +340,10 @@ function zonesf(img) {
                 console.log(packet.center);
                 console.log(packet.radius);
 
-                var color = markers[img.parentNode.id]["marker"].icon.url.split('|')[1];
+                var color = markers[img.parentNode.parentNode.id]["marker"].icon.url.split('|')[1];
                 var coordArr = (packet.center).split(";");
                 var coord = { lat: parseFloat(coordArr[0]), lng: parseFloat(coordArr[1]) };
-                zones[img.parentNode.id] = new google.maps.Circle({
+                zones[img.parentNode.parentNode.id] = new google.maps.Circle({
                     strokeColor: '#' + color,
                     strokeOpacity: 0.9,
                     strokeWeight: 2,
@@ -305,9 +360,9 @@ function zonesf(img) {
     } else {
         img.classList.add("disabled");
 
-        if (zones[img.parentNode.id] != null) {
-            zones[img.parentNode.id].setMap(null);
-            zones[img.parentNode.id] = null;
+        if (zones[img.parentNode.parentNode.id] != null) {
+            zones[img.parentNode.parentNode.id].setMap(null);
+            zones[img.parentNode.parentNode.id] = null;
         }
     }
 }
@@ -316,11 +371,11 @@ function positionf(img) {
     if (img.classList.contains("disabled")) {
         img.classList.remove("disabled");
 
-        routeMarkers[img.parentNode.id] = [];
+        routeMarkers[img.parentNode.parentNode.id] = [];
 
         $.ajax({
             url: '/Index/GetMarkers',
-            data: { "id": img.parentNode.id },
+            data: { "id": img.parentNode.parentNode.id },
             cache: false,
             success: function (packet) {
 
@@ -344,9 +399,9 @@ function positionf(img) {
                     routeMarkers[current.DeviceId][i]["marker"].addListener('click', function () {
 
                         var marker;
-                        for (var i = 0; i < routeMarkers[img.parentNode.id].length; i++) {
-                            if (routeMarkers[img.parentNode.id][i]["marker"] == this) {
-                                marker = routeMarkers[img.parentNode.id][i];
+                        for (var i = 0; i < routeMarkers[img.parentNode.parentNode.id].length; i++) {
+                            if (routeMarkers[img.parentNode.parentNode.id][i]["marker"] == this) {
+                                marker = routeMarkers[img.parentNode.parentNode.id][i];
                             }
                         }
 
@@ -372,14 +427,14 @@ function positionf(img) {
 
                 var line = [];
 
-                routeMarkers[img.parentNode.id].forEach(function (item, i, arr) {
+                routeMarkers[img.parentNode.parentNode.id].forEach(function (item, i, arr) {
                     var coor = item["marker"].position;
                     line.push(coor);
                 });
 
-                var color = routeMarkers[img.parentNode.id][0]["marker"].icon.url.split('|')[1];
+                var color = routeMarkers[img.parentNode.parentNode.id][0]["marker"].icon.url.split('|')[1];
 
-                routeMarkers[img.parentNode.id]["path"] = new google.maps.Polyline({
+                routeMarkers[img.parentNode.parentNode.id]["path"] = new google.maps.Polyline({
                     path: line,
                     geodesic: true,
                     strokeColor: '#' + color,
@@ -387,7 +442,7 @@ function positionf(img) {
                     strokeWeight: 3
                 });
 
-                routeMarkers[img.parentNode.id]["path"].setMap(map);
+                routeMarkers[img.parentNode.parentNode.id]["path"].setMap(map);
 
             }
         });
@@ -397,22 +452,14 @@ function positionf(img) {
 
         // Удаление маркеров и линии
 
-        routeMarkers[img.parentNode.id]["path"].setMap(null);
-        routeMarkers[img.parentNode.id]["path"] = null;
+        routeMarkers[img.parentNode.parentNode.id]["path"].setMap(null);
+        routeMarkers[img.parentNode.parentNode.id]["path"] = null;
 
-        for (var i = 0; i < routeMarkers[img.parentNode.id].length; i++) {
+        for (var i = 0; i < routeMarkers[img.parentNode.parentNode.id].length; i++) {
 
-            routeMarkers[img.parentNode.id][i]["marker"].setMap(null);
-            routeMarkers[img.parentNode.id][i]["marker"] = null;
-            routeMarkers[img.parentNode.id][i] = null;
+            routeMarkers[img.parentNode.parentNode.id][i]["marker"].setMap(null);
+            routeMarkers[img.parentNode.parentNode.id][i]["marker"] = null;
+            routeMarkers[img.parentNode.parentNode.id][i] = null;
         }
     }
-}
-
-function addActionZone() {
-    $('#zones').append('<li><div style="position: relative;margin: 0px 0px 0 200px;" onClick="delActiveZone(this);" id="close" ><p >-</p> </div><a href="#"><b>Name:</b></a><input type="text" class="rounded"><a href="#">Center:</a><input type="text" class="rounded"><a href="#">Radius:</a><input type="text" class="rounded"></li>');
-}
-
-function delActiveZone(div) {
-    div.parentElement.remove();
 }

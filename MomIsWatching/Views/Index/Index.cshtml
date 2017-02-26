@@ -22,7 +22,7 @@
     
 
     <div id="home" class="devices_block">
-        Devices:
+        <p class="title">Devices:</p>
         <ol class="rectangle">
             @foreach (MomIsWatching.Models.Device device in Model.Devices)
             {
@@ -30,43 +30,22 @@
             }
         </ol>
     </div>
-
     
-    <div id="second_screen" class="devices_block" style="display:none">
-        <div class="close_block" style="position:absolute;top: 10%;">
-            <a href="#" onClick="openFirstScreen();">x</a>
-        </div>
+    <div id="second_screen" class="devices_block" style="display: none">
+        
+        <p class="title">Device settings:</p> <a class="close_block" href="#" onClick="openFirstScreen();">Save</a>
+        
         <ol class="rectangle">
-            <li><p class="title">Device 1</p></li>
-            <li><a href="#">Update Time:</a><input type="text" class="rounded"></li>
-            <li><a href="#">Position:</a><input type="text" class="rounded"></li>
-            <li><a onClick="openThirdScreen();" href="#"><b>Active zones</b></a></li>
-            <li><a href="#"><b>Просто еще одна настройка</b></a></li>
+            <li><div class="row" href="#">DeviceId: <input id="deviceId" name="name" type="text" size="24" class="textBox" readonly></div></li>
+            <li><div class="row" href="#">Device name: <input id="name" name="name" type="text" size="20" class="textBox"></div></li>
+            <li><div class="row" href="#">Update Time: <input id="interval" name="interval" type="text" size="5" class="textBox"> seconds</div></li>
+            <li><div class="row" href="#">Position: <input id="position" type="text" size="24" class="textBox" readonly></div></li>
+            <p style="padding-left: 10px;">Active zone:</p>
+            <li><div class="row" href="#">Center: <input id="center" type="text" size="25" class="textBox"></div></li>
+            <li><div class="row" href="#">Radius: <input id="radius" type="text" size="5" class="textBox"> meters</div></li>
         </ol>
-
-
     </div>
-    
-    <div id="third_screen" class="devices_block" style="display:none">
-        <div onClick="openSecondScreen();" class="close_block" style="position:absolute;top: 30px;">
-            <a href="#">x</a>
-        </div>
-        <ol id="zones" class="rectangle">
-            <li><p class="title">Active zones</p></li>
-            <li>
-                <div onClick="delActiveZone(this);" style="position: relative;margin: 0 0 0 200px;" >
-                    <p>-</p>
-                </div>
-                <a href="#"><b>Name:</b></a><input type="text" class="rounded">
-                <a href="#">Center:</a><input type="text" class="rounded">
-                <a href="#">Radius:</a><input type="text" class="rounded">
-            </li>
-        </ol>
-        <a onClick="addActionZone();" class="add_active" href="#"><p style="text-align: center;font-weight:bolder;"><b>+</b></p></a>
-
-
-    </div>
- 
+   
 
     <!-- MAP CANVAS -->
     <div id="map"></div>

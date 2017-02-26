@@ -1,15 +1,17 @@
 ﻿@model MomIsWatching.Models.Device
 
 <li>
-    <a href="#" id="@Model.DeviceId">
+    <div class="row" href="#" id="@Model.DeviceId">
         <div class="device_name" onclick="deviceClicked('@Model.DeviceId')">
             <i id="status" class="offline"></i>
-            <div style="display: inline; vertical-align: middle;">@Model.Name (@Model.Id)</div> 
+            <div id="name" style="display: inline; vertical-align: middle;">@Model.Name</div> 
             <img class="minimarker" width="13" style="vertical-align: text-bottom;" alt=""/>
         </div>
-        <img class="device_option disabled" title="Показать все вызовы SOS" onClick="sosf(this);" src="/Content/img/sos.png" alt="sos">
-        <img class="device_option disabled" title="Показать маршрут передвижений" onClick="positionf(this);" src="/Content/img/route.png" alt="route">
-        <img class="device_option disabled" title="Показать активные зоны" onClick="zonesf(this);" src="/Content/img/zones.png" alt="zones">
-        <img class="device_option" title="Настройки девайса" onClick="openSecondScreen();" src="/Content/img/settings.png" alt="settings">
-    </a>
+        <div style="float: right;">
+            <img class="device_option disabled" title="Показать все вызовы SOS" onClick="sosf(this);" src="/Content/img/sos.png" alt="sos">
+            <img class="device_option disabled" title="Показать маршрут передвижений" onClick="positionf(this);" src="/Content/img/route.png" alt="route">
+            <img class="device_option disabled" title="Показать активные зоны" onClick="zonesf(this);" src="/Content/img/zones.png" alt="zones">
+            <img class="device_option" title="Настройки девайса" onClick="openSecondScreen('@Model.DeviceId');" src="/Content/img/settings.png" alt="settings">
+        </div>
+    </div>
 </li>

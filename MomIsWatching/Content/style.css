@@ -40,47 +40,43 @@
     text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
 
-.rectangle a {
+.rectangle .row {
     position: relative;
     display: block;
-    padding: .4em .4em .4em .8em;
+    padding: .7em .4em .7em .8em;
     border-top: 1px solid #e6e6e6;
     background: white;
     color: #444;
     text-decoration: none;
     transition: all .3s ease-out;
+    cursor: pointer;
 }
 
-.rectangle a:hover {
+.rectangle .row:hover {
     background: #fafafa;
 }
 
 .close_block {
     color: #777;
     font: 14px/100% arial, sans-serif;
-    text-decoration: none;
-    text-shadow: 0 1px 0 #fff;
-    position:absolute;
-    top: 5px;
-    right: 5px;
-}
-		
-.close_block a {
-    text-decoration: none;
+    float: right;
 }
 		
 .title {
     margin-left:10px;
+    display: inline;
 }
 		
 .add_active {
     text-decoration: none;		
 }
-		
-.rounded { 
-    border-radius:4px; 
-    -moz-border-radius:4px; 
-    -webkit-border-radius:4px; 	
+
+.textBox {
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 3px;
 }
 
 .copyrights {

@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web.Mvc;
 using MomIsWatching.Models;
+using Newtonsoft.Json.Linq;
 using DeviceContext = MomIsWatching.Models.DeviceContext;
 
 namespace MomIsWatching.Controllers
@@ -101,6 +104,39 @@ namespace MomIsWatching.Controllers
             string zones = DbContext.Devices.ToList().FirstOrDefault(x1 => x1.DeviceId == id)?.Zones;
 
             return Json(zones, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetDeviceInfo(string id)
+        {
+            DbContext = new DeviceContext();
+
+            var device = DbContext.Devices.ToList().FirstOrDefault(x1 => x1.DeviceId == id);
+
+            return Json(device, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool SaveSettings(string device) //string DeviceId, int Interval, string Name, Array Zones
+        {
+            DbContext = new DeviceContext();
+
+            JObject jObject = JObject.Parse(device);
+
+            string id = jObject["DeviceId"].ToString();
+
+            var deviceOne = DbContext.Devices.ToList().FirstOrDefault(x1 => x1.DeviceId == id);
+
+            if (deviceOne != null)
+            {
+                deviceOne.Name = jObject["Name"].ToString();
+                deviceOne.Interval = Int32.Parse(jObject["Interval"].ToString());
+                deviceOne.Zones = jObject["Zones"].ToString();
+
+                DbContext.Devices.AddOrUpdate(deviceOne);
+                // Коммитим изменения в БД
+                DbContext.SaveChanges();
+            }
+
+            return true;
         }
 
         protected override void Dispose(bool disposing)
