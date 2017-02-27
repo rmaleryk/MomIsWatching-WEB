@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<model>
+   <node name="MomIsWatching.Tests" testCount="(14 tests)" status="[0:04.685] Success">
+      <node name="MomIsWatching.Tests.Controllers" testCount="(14 tests)" status="[0:04.685] Success">
+         <node name="IndexControllerTest" testCount="(14 tests)" status="[0:04.685] Success">
+            <node name="GetDeviceInfo_IsNotNull" status="[0:00.000] Success" />
+            <node name="GetDeviceInfo_ReturnType" status="[0:00.001] Success" />
+            <node name="GetLastDevicePosition_DbContextIsNotNull" status="[0:00.002] Success" />
+            <node name="GetLastDevicePosition_ReturnType" status="[0:03.859] Success" />
+            <node name="GetMarkers_IsNotNull" status="[0:00.013] Success" />
+            <node name="GetMarkers_ReturnType" status="[0:00.002] Success" />
+            <node name="GetSosMarkers_IsNotNull" status="[0:00.002] Success" />
+            <node name="GetSosMarkers_ReturnType" status="[0:00.001] Success" />
+            <node name="GetZones_IsNotNull" status="[0:00.001] Success" />
+            <node name="GetZones_ReturnType" status="[0:00.061] Success" />
+            <node name="Index_ViewIsSendDbContext" status="[0:00.000] Success" />
+            <node name="Index_ViewResultNotNull" status="[0:00.211] Success" />
+            <node name="SaveSettings_WithExistingIdIsTrue" status="[0:00.514] Success" />
+            <node name="SaveSettings_WithNotExistingIdIsFalse" status="[0:00.012] Success" />
+         </node>
+      </node>
+   </node>
+</model>

@@ -8,47 +8,242 @@
     </InspectionScope>
   </Information>
   <IssueTypes>
-    <IssueType Id="ClassNeverInstantiated.Global" Category="Potential Code Quality Issues" CategoryId="CodeSmell" SubCategory="Class is never instantiated" Description="Class is never instantiated: Non-private accessibility" Severity="SUGGESTION" Global="True" />
+    <IssueType Id="ArrangeRedundantParentheses" Category="Code Style" CategoryId="CodeStyleIssues" Description="Remove redundant parentheses" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=ArrangeRedundantParentheses" />
+    <IssueType Id="BuiltInTypeReferenceStyle" Category="Code Style" CategoryId="CodeStyleIssues" Description="Replace built-in type reference with a CLR type name or a keyword" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=BuiltInTypeReferenceStyle" />
     <IssueType Id="CoercedEqualsUsing" Category="Potential Code Quality Issues" CategoryId="CodeSmell" SubCategory="Using of coerced equality" Description="Using of coerced equality: Using of coerced equality operator" Severity="WARNING" />
     <IssueType Id="CssBrowserCompatibility" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="CSS symbol / syntax is not compatible with a specific browser" Severity="WARNING" />
+    <IssueType Id="DeclarationHides" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="Declaration hides another declaration from an outer scope" Severity="HINT" />
+    <IssueType Id="ExpressionIsAlwaysConst" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="Expression is always constant" Severity="WARNING" />
     <IssueType Id="InvertIf" Category="Language Usage Opportunities" CategoryId="LanguageUsage" Description="Invert 'if' statement to reduce nesting" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=InvertIf" />
-    <IssueType Id="LoopCanBeConvertedToQuery" Category="Language Usage Opportunities" CategoryId="LanguageUsage" Description="Loop can be converted into LINQ-expression" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=LoopCanBeConvertedToQuery" />
     <IssueType Id="MemberCanBeMadeStatic.Local" Category="Common Practices and Code Improvements" CategoryId="BestPractice" SubCategory="Member can be made static(shared)" Description="Member can be made static(shared): Private accessibility" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=MemberCanBeMadeStatic.Local" />
+    <IssueType Id="MissingAltAttributeInImgTag" Category="Common Practices and Code Improvements" CategoryId="BestPractice" SubCategory="Important tags or attributes missing" Description="Important tags or attributes missing: &lt;img&gt; should specify alternative text" Severity="HINT" />
+    <IssueType Id="OlTagContainsNonLiElements" Category="Potential Code Quality Issues" CategoryId="CodeSmell" SubCategory="Elements not allowed in context" Description="Elements not allowed in context: &lt;ol&gt; contains elements other than &lt;li&gt; or &lt;li&gt; is unclosed" Severity="HINT" />
     <IssueType Id="PossiblyUnassignedProperty" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="Use of possibly unassigned property or global variable" Severity="HINT" />
     <IssueType Id="RedundantEmptyObjectCreationArgumentList" Category="Redundancies in Code" CategoryId="CodeRedundancy" Description="Redundant empty argument list on object creation expression" Severity="HINT" />
+    <IssueType Id="StringLiteralWrongQuotes" Category="Code Style" CategoryId="CodeStyleIssues" Description="Non-compliant quotes around string literal" Severity="HINT" />
     <IssueType Id="SuggestVarOrType_BuiltInTypes" Category="Code Style" CategoryId="CodeStyleIssues" SubCategory="Use preferred 'var' style" Description="Use preferred 'var' style: For built-in types" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=SuggestVarOrType_BuiltInTypes" />
     <IssueType Id="SuggestVarOrType_SimpleTypes" Category="Code Style" CategoryId="CodeStyleIssues" SubCategory="Use preferred 'var' style" Description="Use preferred 'var' style: When type is simple" Severity="HINT" WikiUrl="https://www.jetbrains.com/resharperplatform/help?Keyword=SuggestVarOrType_SimpleTypes" />
     <IssueType Id="UnknownCssClass" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="Unknown CSS class" Severity="WARNING" />
-    <IssueType Id="UnusedAutoPropertyAccessor.Global" Category="Potential Code Quality Issues" CategoryId="CodeSmell" SubCategory="Auto-property accessor is never used" Description="Auto-property accessor is never used: Non-private accessibility" Severity="WARNING" Global="True" />
+    <IssueType Id="UnusedLocals" Category="Redundancies in Symbol Declarations" CategoryId="DeclarationRedundancy" Description="Unused local variable / function / class" Severity="WARNING" />
+    <IssueType Id="UnusedParameter" Category="Redundancies in Symbol Declarations" CategoryId="DeclarationRedundancy" Description="Unused parameter" Severity="WARNING" />
+    <IssueType Id="UsageOfPossiblyUnassignedValue" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="Usage of possibly unassigned local variable" Severity="WARNING" />
     <IssueType Id="UseOfImplicitGlobalInFunctionScope" Category="Potential Code Quality Issues" CategoryId="CodeSmell" Description="Use of implicitly declared global variable" Severity="WARNING" />
   </IssueTypes>
   <Issues>
     <Project Name="MomIsWatching">
-      <Issue TypeId="ClassNeverInstantiated.Global" File="MomIsWatching\App_Start\BundleConfig.cs" Offset="79-91" Line="5" Message="Class 'BundleConfig' is never instantiated" />
-      <Issue TypeId="ClassNeverInstantiated.Global" File="MomIsWatching\App_Start\FilterConfig.cs" Offset="70-82" Line="5" Message="Class 'FilterConfig' is never instantiated" />
-      <Issue TypeId="ClassNeverInstantiated.Global" File="MomIsWatching\App_Start\RouteConfig.cs" Offset="97-108" Line="6" Message="Class 'RouteConfig' is never instantiated" />
       <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="231-235" Line="15" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
       <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="315-328" Line="18" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
       <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="375-382" Line="20" Message="The property 'opacity' is not compatible with Internet Explorer 8.0" />
       <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="725-729" Line="40" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
-      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="960-970" Line="51" Message="The property 'transition' is not compatible with Internet Explorer 8.0, Opera 12.0, Safari 8.0" />
-      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1408-1421" Line="81" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
-      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1554-1558" Line="88" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
-      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1585-1598" Line="89" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
-      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1659-1663" Line="92" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
-      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1877-1890" Line="104" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
-      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1921-1925" Line="105" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
-      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="2106-2119" Line="115" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
-      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="2150-2154" Line="116" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
-      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="588-590" Line="23" Message="Invert 'if' statement to reduce nesting" />
-      <Issue TypeId="LoopCanBeConvertedToQuery" File="MomIsWatching\Controllers\IndexController.cs" Offset="660-667" Line="25" Message="Loop can be converted into LINQ-expression" />
-      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="1253-1255" Line="46" Message="Invert 'if' statement to reduce nesting" />
-      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="1538-1540" Line="52" Message="Invert 'if' statement to reduce nesting" />
-      <Issue TypeId="ClassNeverInstantiated.Global" File="MomIsWatching\Models\Clients.cs" Offset="119-126" Line="6" Message="Class 'Clients' is never instantiated" />
-      <Issue TypeId="UnusedAutoPropertyAccessor.Global" File="MomIsWatching\Models\Clients.cs" Offset="459-463" Line="16" Message="Auto-property accessor is never used" />
-      <Issue TypeId="UnusedAutoPropertyAccessor.Global" File="MomIsWatching\Models\Clients.cs" Offset="509-513" Line="17" Message="Auto-property accessor is never used" />
-      <Issue TypeId="UnusedAutoPropertyAccessor.Global" File="MomIsWatching\Models\DeviceContext.cs" Offset="159-163" Line="7" Message="Auto-property accessor is never used" />
-      <Issue TypeId="UnusedAutoPropertyAccessor.Global" File="MomIsWatching\Models\DeviceContext.cs" Offset="217-221" Line="8" Message="Auto-property accessor is never used" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="963-973" Line="51" Message="The property 'transition' is not compatible with Internet Explorer 8.0, Opera 12.0, Safari 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1305-1318" Line="75" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1411-1415" Line="78" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1512-1516" Line="84" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1543-1556" Line="85" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1617-1621" Line="88" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1835-1848" Line="100" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="1879-1883" Line="101" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="2064-2077" Line="111" Message="The property 'border-radius' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="CssBrowserCompatibility" File="MomIsWatching\Content\style.css" Offset="2108-2112" Line="112" Message="The function 'rgba' is not compatible with Internet Explorer 8.0" />
+      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="851-853" Line="33" Message="Invert 'if' statement to reduce nesting" />
+      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="1136-1138" Line="39" Message="Invert 'if' statement to reduce nesting" />
+      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="1604-1606" Line="56" Message="Invert 'if' statement to reduce nesting" />
+      <Issue TypeId="ArrangeRedundantParentheses" File="MomIsWatching\Controllers\IndexController.cs" Offset="1854-1855" Line="60" Message="Redundant parentheses" />
+      <Issue TypeId="InvertIf" File="MomIsWatching\Controllers\IndexController.cs" Offset="2236-2238" Line="73" Message="Invert 'if' statement to reduce nesting" />
+      <Issue TypeId="ArrangeRedundantParentheses" File="MomIsWatching\Controllers\IndexController.cs" Offset="2486-2487" Line="77" Message="Redundant parentheses" />
+      <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Controllers\IndexController.cs" Offset="2803-2809" Line="88" Message="Use 'var' (built-in types)" />
+      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Controllers\IndexController.cs" Offset="3376-3383" Line="106" Message="Use 'var' (simple types)" />
+      <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Controllers\IndexController.cs" Offset="3432-3438" Line="108" Message="Use 'var' (built-in types)" />
+      <Issue TypeId="BuiltInTypeReferenceStyle" File="MomIsWatching\Controllers\IndexController.cs" Offset="3728-3733" Line="115" Message="Built-in type reference is inconsistent with selected Code Style" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="214-220" Line="12" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="221-225" Line="12" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="226-232" Line="12" Message="Property or global variable 'LatLng' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="273-279" Line="14" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="280-284" Line="14" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="313-318" Line="14" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="439-450" Line="22" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="593-605" Line="25" Message="Property or global variable 'MozWebSocket' is possibly never assigned" />
+      <Issue TypeId="UnusedParameter" File="MomIsWatching\scripts\init.js" Offset="795-800" Line="32" Message="Parameter 'error' is never used" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="1064-1082" Line="43" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="1199-1217" Line="47" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="1747-1769" Line="63" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\scripts\init.js" Offset="1893-1895" Line="68" Message="'!=' tries to coerce values before comparing them which can lead to some unexpected results" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="2004-2010" Line="71" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="2011-2015" Line="71" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="2016-2022" Line="71" Message="Property or global variable 'LatLng' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="2075-2078" Line="72" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="2136-2139" Line="73" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="UnusedLocals" File="MomIsWatching\scripts\init.js" Offset="2186-2196" Line="75" Message="Local variable 'cityCircle' is never used" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="2203-2209" Line="75" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="2210-2214" Line="75" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="2215-2221" Line="75" Message="Property or global variable 'Circle' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="2463-2469" Line="81" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="2470-2474" Line="81" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="2475-2481" Line="81" Message="Property or global variable 'LatLng' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="2537-2540" Line="82" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="2601-2604" Line="83" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="ExpressionIsAlwaysConst" File="MomIsWatching\scripts\init.js" Offset="3148-3151" Line="95" Message="Expressions is always 'null'." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="3351-3366" Line="110" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="3382-3394" Line="110" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="3492-3522" Line="116" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="4096-4099" Line="136" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="4144-4147" Line="136" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="4607-4613" Line="147" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4614-4618" Line="147" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4619-4630" Line="147" Message="Property or global variable 'MarkerImage' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="4659-4665" Line="148" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4666-4670" Line="148" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4671-4675" Line="148" Message="Property or global variable 'Size' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="4702-4708" Line="149" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4709-4713" Line="149" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4714-4719" Line="149" Message="Property or global variable 'Point' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="4744-4750" Line="150" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4751-4755" Line="150" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4756-4761" Line="150" Message="Property or global variable 'Point' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="4803-4809" Line="152" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4810-4814" Line="152" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4815-4826" Line="152" Message="Property or global variable 'MarkerImage' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="4904-4910" Line="153" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4911-4915" Line="153" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4916-4920" Line="153" Message="Property or global variable 'Size' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="4947-4953" Line="154" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4954-4958" Line="154" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4959-4964" Line="154" Message="Property or global variable 'Point' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="4989-4995" Line="155" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="4996-5000" Line="155" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="5001-5006" Line="155" Message="Property or global variable 'Point' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="5069-5075" Line="157" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="5076-5080" Line="157" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="5081-5087" Line="157" Message="Property or global variable 'Marker' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="5147-5153" Line="159" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="5154-5158" Line="159" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="5169-5173" Line="159" Message="Property or global variable 'DROP' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="5531-5538" Line="169" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="5602-5614" Line="170" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\scripts\init.js" Offset="6665-6667" Line="199" Message="'==' tries to coerce values before comparing them which can lead to some unexpected results" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="6717-6729" Line="200" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="6730-6736" Line="200" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="6737-6741" Line="200" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="6752-6758" Line="200" Message="Property or global variable 'BOUNCE' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="7050-7052" Line="205" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="7126-7132" Line="207" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7133-7137" Line="207" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7138-7148" Line="207" Message="Property or global variable 'InfoWindow' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7361-7373" Line="218" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="7374-7380" Line="218" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7381-7385" Line="218" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7396-7400" Line="218" Message="Property or global variable 'DROP' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7434-7446" Line="219" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="7447-7453" Line="219" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7454-7458" Line="219" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7469-7475" Line="219" Message="Property or global variable 'BOUNCE' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7526-7538" Line="222" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="7539-7545" Line="222" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7546-7550" Line="222" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7561-7565" Line="222" Message="Property or global variable 'DROP' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="7579-7584" Line="224" Message="Property or global variable 'panTo' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="7671-7689" Line="228" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="7708-7710" Line="229" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="7874-7890" Line="237" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="7910-7917" Line="238" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\scripts\init.js" Offset="8303-8305" Line="247" Message="'!=' tries to coerce values before comparing them which can lead to some unexpected results" />
+      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\scripts\init.js" Offset="8377-8379" Line="248" Message="'!=' tries to coerce values before comparing them which can lead to some unexpected results" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="8730-8751" Line="260" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="UnusedParameter" File="MomIsWatching\scripts\init.js" Offset="9054-9060" Line="264" Message="Parameter 'packet' is never used" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="9205-9211" Line="267" Message="Property or global variable 'setMap' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="9275-9281" Line="269" Message="Property or global variable 'setMap' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="9392-9399" Line="277" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="9419-9435" Line="278" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="9477-9499" Line="281" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\scripts\init.js" Offset="9967-9969" Line="290" Message="'!=' tries to coerce values before comparing them which can lead to some unexpected results" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="10289-10292" Line="295" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="10354-10357" Line="296" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="10818-10840" Line="316" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="DeclarationHides" File="MomIsWatching\scripts\init.js" Offset="10998-10999" Line="321" Message="Declaration hides variable i from outer scope" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="11242-11245" Line="327" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="11316-11319" Line="328" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="11420-11426" Line="331" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="11427-11431" Line="331" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="11432-11438" Line="331" Message="Property or global variable 'Marker' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="11749-11759" Line="338" Message="Property or global variable 'setOpacity' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="11895-11902" Line="341" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="DeclarationHides" File="MomIsWatching\scripts\init.js" Offset="12024-12025" Line="345" Message="Declaration hides variable i from outer scope" />
+      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\scripts\init.js" Offset="12182-12184" Line="346" Message="'==' tries to coerce values before comparing them which can lead to some unexpected results" />
+      <Issue TypeId="UsageOfPossiblyUnassignedValue" File="MomIsWatching\scripts\init.js" Offset="12385-12391" Line="351" Message="Usage of possibly unassigned value" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="12732-12738" Line="356" Message="Property or global variable 'Charge' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="12833-12835" Line="357" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="12932-12938" Line="359" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="12939-12943" Line="359" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="12944-12954" Line="359" Message="Property or global variable 'InfoWindow' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="13323-13329" Line="374" Message="Property or global variable 'setMap' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="13652-13669" Line="386" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\scripts\init.js" Offset="13829-13831" Line="391" Message="'==' tries to coerce values before comparing them which can lead to some unexpected results" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="14076-14079" Line="397" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="14297-14303" Line="400" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="14304-14308" Line="400" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="14309-14315" Line="400" Message="Property or global variable 'Circle' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="14352-14355" Line="401" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="14476-14479" Line="404" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="14867-14873" Line="418" Message="Property or global variable 'setMap' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="15176-15195" Line="431" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="DeclarationHides" File="MomIsWatching\scripts\init.js" Offset="15353-15354" Line="436" Message="Declaration hides variable i from outer scope" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="15574-15577" Line="441" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="15623-15626" Line="441" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="15708-15714" Line="443" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="15715-15719" Line="443" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="15720-15726" Line="443" Message="Property or global variable 'Marker' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="16039-16049" Line="450" Message="Property or global variable 'setOpacity' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="16187-16194" Line="453" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="DeclarationHides" File="MomIsWatching\scripts\init.js" Offset="16283-16284" Line="456" Message="Declaration hides variable i from outer scope" />
+      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\scripts\init.js" Offset="16441-16443" Line="457" Message="'==' tries to coerce values before comparing them which can lead to some unexpected results" />
+      <Issue TypeId="UsageOfPossiblyUnassignedValue" File="MomIsWatching\scripts\init.js" Offset="16630-16636" Line="462" Message="Usage of possibly unassigned value" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="16958-16963" Line="469" Message="Property or global variable 'IsSos' is possibly never assigned" />
+      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\scripts\init.js" Offset="16964-16966" Line="469" Message="'==' tries to coerce values before comparing them which can lead to some unexpected results" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="17213-17219" Line="473" Message="Property or global variable 'Charge' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="17325-17327" Line="474" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="17424-17430" Line="475" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="17431-17435" Line="475" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="17436-17446" Line="475" Message="Property or global variable 'InfoWindow' is possibly never assigned" />
+      <Issue TypeId="DeclarationHides" File="MomIsWatching\scripts\init.js" Offset="17705-17706" Line="484" Message="Declaration hides variable i from outer scope" />
+      <Issue TypeId="UnusedParameter" File="MomIsWatching\scripts\init.js" Offset="17705-17706" Line="484" Message="Parameter 'i' is never used" />
+      <Issue TypeId="UnusedParameter" File="MomIsWatching\scripts\init.js" Offset="17708-17711" Line="484" Message="Parameter 'arr' is never used" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="17933-17936" Line="489" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="18018-18024" Line="491" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="18025-18029" Line="491" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="18030-18038" Line="491" Message="Property or global variable 'Polyline' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="18145-18148" Line="494" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="18327-18333" Line="499" Message="Property or global variable 'setMap' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="18528-18534" Line="509" Message="Property or global variable 'setMap' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="18770-18776" Line="514" Message="Property or global variable 'setMap' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19124-19133" Line="526" Message="Property or global variable 'getCenter' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="19234-19240" Line="531" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19241-19245" Line="531" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19246-19252" Line="531" Message="Property or global variable 'Marker' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19373-19385" Line="536" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="19386-19392" Line="536" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19393-19397" Line="536" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19408-19414" Line="536" Message="Property or global variable 'BOUNCE' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="19447-19453" Line="537" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19454-19458" Line="537" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19459-19469" Line="537" Message="Property or global variable 'InfoWindow' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="19704-19710" Line="542" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19711-19715" Line="542" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="UnusedParameter" File="MomIsWatching\scripts\init.js" Offset="19767-19772" Line="542" Message="Parameter 'event' is never used" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19800-19812" Line="543" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19895-19904" Line="545" Message="Property or global variable 'setCenter' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19930-19935" Line="546" Message="Property or global variable 'panTo' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="19966-19972" Line="548" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="19973-19977" Line="548" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="UnusedParameter" File="MomIsWatching\scripts\init.js" Offset="20026-20031" Line="548" Message="Parameter 'event' is never used" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="20059-20071" Line="549" Message="Property or global variable 'setAnimation' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="20260-20269" Line="553" Message="Property or global variable 'setCenter' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="20396-20405" Line="557" Message="Property or global variable 'setRadius' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="20519-20524" Line="561" Message="Property or global variable 'panTo' is possibly never assigned" />
+      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\scripts\init.js" Offset="20623-20629" Line="566" Message="Use of an implicitly declared global variable 'google'" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="20630-20634" Line="566" Message="Property or global variable 'maps' is possibly never assigned" />
+      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\scripts\init.js" Offset="20635-20641" Line="566" Message="Property or global variable 'Circle' is possibly never assigned" />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="20666-20675" Line="567" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
+      <Issue TypeId="StringLiteralWrongQuotes" File="MomIsWatching\scripts\init.js" Offset="20752-20761" Line="570" Message="Your code style requires literal expression to be surrounded with &quot;-quotes." />
       <Issue TypeId="MemberCanBeMadeStatic.Local" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="1079-1095" Line="40" Message="Method 'WebSocketRequest' can be made static" />
       <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="1322-1328" Line="46" Message="Use 'var' (built-in types)" />
       <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="1996-1999" Line="63" Message="Use 'var' (built-in types)" />
@@ -56,69 +251,16 @@
       <Issue TypeId="SuggestVarOrType_BuiltInTypes" File="MomIsWatching\Subscriptions\DeviceSubscriptionHandler.ashx.cs" Offset="4715-4718" Line="134" Message="Use 'var' (built-in types)" />
       <Issue TypeId="MemberCanBeMadeStatic.Local" File="MomIsWatching\Subscriptions\MapSubscriptionHandler.ashx.cs" Offset="920-936" Line="35" Message="Method 'WebSocketRequest' can be made static" />
       <Issue TypeId="RedundantEmptyObjectCreationArgumentList" File="MomIsWatching\Subscriptions\MapSubscriptionHandler.ashx.cs" Offset="1269-1271" Line="44" Message="Empty argument list is redundant" />
-      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Views\Home\Index.cshtml" Offset="202-229" Line="11" Message="Use 'var' (simple types)" />
-      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Views\Home\Index.cshtml" Offset="622-652" Line="25" Message="Use 'var' (simple types)" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="125-138" Line="5" Message="Property or global variable 'deviceClicked' is possibly never assigned" />
-      <Issue TypeId="UnknownCssClass" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="332-342" Line="8" Message="Unknown CSS class 'minimarker'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="500-504" Line="10" Message="Property or global variable 'sosf' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="634-643" Line="11" Message="Property or global variable 'positionf' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="770-776" Line="12" Message="Property or global variable 'zonesf' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="898-914" Line="13" Message="Property or global variable 'openSecondScreen' is possibly never assigned" />
-      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Views\Index\Index.cshtml" Offset="636-663" Line="28" Message="Use 'var' (simple types)" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2553-2559" Line="80" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2560-2564" Line="80" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2565-2571" Line="80" Message="Property or global variable 'LatLng' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2612-2618" Line="82" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2619-2623" Line="82" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="2624-2627" Line="82" Message="Property or global variable 'Map' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3045-3057" Line="99" Message="Property or global variable 'MozWebSocket' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3552-3560" Line="114" Message="Property or global variable 'DeviceId' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="3861-3869" Line="121" Message="Property or global variable 'DeviceId' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="4110-4118" Line="127" Message="Property or global variable 'DeviceId' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5766-5772" Line="174" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5773-5777" Line="174" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5778-5789" Line="174" Message="Property or global variable 'MarkerImage' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5826-5832" Line="175" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5833-5837" Line="175" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5838-5842" Line="175" Message="Property or global variable 'Size' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5877-5883" Line="176" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5884-5888" Line="176" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5889-5894" Line="176" Message="Property or global variable 'Point' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5927-5933" Line="177" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5934-5938" Line="177" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5939-5944" Line="177" Message="Property or global variable 'Point' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="5994-6000" Line="179" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6001-6005" Line="179" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6006-6017" Line="179" Message="Property or global variable 'MarkerImage' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6103-6109" Line="180" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6110-6114" Line="180" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6115-6119" Line="180" Message="Property or global variable 'Size' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6154-6160" Line="181" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6161-6165" Line="181" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6166-6171" Line="181" Message="Property or global variable 'Point' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6204-6210" Line="182" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6211-6215" Line="182" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6216-6221" Line="182" Message="Property or global variable 'Point' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6292-6298" Line="184" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6299-6303" Line="184" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6304-6310" Line="184" Message="Property or global variable 'Marker' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6386-6392" Line="186" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6393-6397" Line="186" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6408-6412" Line="186" Message="Property or global variable 'DROP' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="6913-6925" Line="197" Message="Property or global variable 'setAnimation' is possibly never assigned" />
-      <Issue TypeId="CoercedEqualsUsing" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7916-7918" Line="218" Message="'==' tries to coerce values before comparing them which can lead to some unexpected results" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7976-7988" Line="219" Message="Property or global variable 'setAnimation' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7989-7995" Line="219" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="7996-8000" Line="219" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8011-8017" Line="219" Message="Property or global variable 'BOUNCE' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8312-8318" Line="224" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8319-8323" Line="224" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8324-8334" Line="224" Message="Property or global variable 'InfoWindow' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8545-8557" Line="233" Message="Property or global variable 'setAnimation' is possibly never assigned" />
-      <Issue TypeId="UseOfImplicitGlobalInFunctionScope" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8558-8564" Line="233" Message="Use of an implicitly declared global variable 'google'" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8565-8569" Line="233" Message="Property or global variable 'maps' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8580-8584" Line="233" Message="Property or global variable 'DROP' is possibly never assigned" />
-      <Issue TypeId="PossiblyUnassignedProperty" File="MomIsWatching\Views\Index\Index.cshtml" Offset="8604-8609" Line="234" Message="Property or global variable 'panTo' is possibly never assigned" />
+      <Issue TypeId="UnknownCssClass" File="MomIsWatching\Views\Index\DeviceRow.cshtml" Offset="344-354" Line="8" Message="Unknown CSS class 'minimarker'" />
+      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching\Views\Index\Index.cshtml" Offset="612-639" Line="27" Message="Use 'var' (simple types)" />
+      <Issue TypeId="OlTagContainsNonLiElements" File="MomIsWatching\Views\Index\Index.cshtml" Offset="1599-1660" Line="43" Message="&lt;ol&gt; contains elements other than &lt;li&gt; or &lt;li&gt; is unclosed" />
+      <Issue TypeId="MissingAltAttributeInImgTag" File="MomIsWatching\Views\Index\Index.cshtml" Offset="1756-1759" Line="44" Message="&lt;img&gt; should specify alternative text" />
+    </Project>
+    <Project Name="MomIsWatching.Tests">
+      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching.Tests\Controllers\IndexControllerTest.cs" Offset="3774-3781" Line="139" Message="Use 'var' (simple types)" />
+      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching.Tests\Controllers\IndexControllerTest.cs" Offset="4091-4104" Line="148" Message="Use 'var' (simple types)" />
+      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching.Tests\Controllers\IndexControllerTest.cs" Offset="4507-4514" Line="159" Message="Use 'var' (simple types)" />
+      <Issue TypeId="SuggestVarOrType_SimpleTypes" File="MomIsWatching.Tests\Controllers\IndexControllerTest.cs" Offset="4824-4837" Line="168" Message="Use 'var' (simple types)" />
     </Project>
   </Issues>
 </Report>

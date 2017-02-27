@@ -19,24 +19,8 @@ namespace MomIsWatching.Controllers
             return View(DbContext);
         }
 
-        public ActionResult DeviceLastPosition()
-        {
-            var devices = new List<DeviceLog>(); 
-
-            if(DbContext.DeviceLogs.ToList().Any())
-            {
-                foreach (var device in DbContext.Devices.ToList())
-                {
-                   devices.Add(DbContext.DeviceLogs.ToList().Last(x => x.DeviceId == device.Id.ToString()));
-                }
-            }
-            
-            return PartialView(devices);
-        }
-
         public ActionResult DeviceRow()
         {
-
             return PartialView(DbContext.Devices.ToList().Last());
         }
 
@@ -115,7 +99,7 @@ namespace MomIsWatching.Controllers
             return Json(device, JsonRequestBehavior.AllowGet);
         }
 
-        public bool SaveSettings(string device) //string DeviceId, int Interval, string Name, Array Zones
+        public bool SaveSettings(string device)
         {
             DbContext = new DeviceContext();
 
@@ -135,6 +119,8 @@ namespace MomIsWatching.Controllers
                 // Коммитим изменения в БД
                 DbContext.SaveChanges();
             }
+            else
+                return false;
 
             return true;
         }
